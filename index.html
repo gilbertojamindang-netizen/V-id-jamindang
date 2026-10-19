@@ -3,41 +3,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#08050d">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
 <title>Jamindang Files | Void Archive</title>
 <style>
 :root{
-  --bg:#08050d;--panel:#100b18;--line:#30203d;
-  --purple:#a855f7;--text:#f7f0ff;--muted:#a99ab8;
+  --bg:#050505;
+  --panel:#0b0b0b;
+  --line:#29202f;
+  --purple:#a855f7;
+  --text:#f7f0ff;
+  --muted:#a99ab8;
 }
 *{box-sizing:border-box}
 body{
   margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,Helvetica,sans-serif
 }
-.container{width:min(1000px,92%);margin:auto}
-header{
-  background:#0c0812;border-bottom:1px solid var(--line);
-}
+.container{width:min(1100px,92%);margin:auto}
+header{background:#070707;border-bottom:1px solid var(--line)}
 nav{
   min-height:76px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;
+  justify-content:space-between;gap:12px
 }
 .brand{display:flex;align-items:center;gap:12px;font-weight:900}
 .logo{
   display:grid;place-items:center;width:44px;height:44px;
   border-radius:12px;background:linear-gradient(135deg,#bd77ff,#6021a5);
-  box-shadow:0 0 22px #8b32d544;font-size:24px;
+  box-shadow:0 0 22px #8b32d544;font-size:24px
 }
 .brand small{
   display:block;color:#b783ef;font-size:10px;
-  letter-spacing:2px;margin-top:5px;
+  letter-spacing:2px;margin-top:5px
 }
 .status{color:#c4a0e8;font-size:11px}
 .hero{
-  padding:55px 0 35px;
-  background:radial-gradient(ellipse at 50% 0%,#6525a844,transparent 70%);
+  padding:55px 0 35px;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,#6525a822,transparent 70%)
 }
 .eyebrow{font-size:11px;letter-spacing:3px;color:#c084fc}
 h1{font-size:clamp(36px,8vw,62px);line-height:1.06;margin:16px 0}
@@ -45,64 +47,65 @@ h1 span{color:#bd83ff}
 p{line-height:1.65}
 .muted{color:var(--muted)}
 .search{
-  display:flex;align-items:center;gap:10px;margin-top:25px;
-  border:1px solid var(--line);background:#130d1c;
-  padding:6px 14px;border-radius:12px;
+  display:flex;align-items:center;gap:10px;margin:25px auto 0;
+  border:1px solid var(--line);background:#0c0c0c;
+  padding:6px 14px;border-radius:12px;max-width:650px
 }
 .search input{
   width:100%;min-width:0;padding:12px 0;
-  border:0;outline:0;background:transparent;color:white;
+  border:0;outline:0;background:transparent;color:white
 }
 .search input::placeholder{color:#83718f}
 .sectionhead{
   display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin:25px 0 16px;
+  gap:12px;margin:25px 0 16px
 }
 h2{font-size:20px;margin:0}
 #count{color:var(--muted);font-size:12px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .filter{
   padding:10px 13px;border:1px solid var(--line);
-  border-radius:25px;background:#120d19;color:#c8b8d6;cursor:pointer;
+  border-radius:25px;background:#0b0b0b;color:#c8b8d6;cursor:pointer
 }
 .filter.active,.filter:hover{
-  color:white;background:#512078;border-color:#a855f7;
+  color:white;background:#512078;border-color:var(--purple)
 }
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .card{
-  min-width:0;background:linear-gradient(145deg,#171020,#0e0a14);
+  min-width:0;background:linear-gradient(145deg,#111,#090909);
   border:1px solid var(--line);border-radius:15px;padding:17px;
-  transition:.2s;
+  transition:.2s
 }
 .card:hover{border-color:#9845ce;transform:translateY(-2px)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .fileicon{
   width:48px;height:48px;display:grid;place-items:center;
-  border-radius:12px;background:#291438;color:#d9b6ff;font-size:12px;
-  font-weight:bold;
+  border-radius:12px;background:#21132c;color:#d9b6ff;
+  font-size:12px;font-weight:bold;border:1px solid #503065
 }
 .ext{
   color:#d0a7fa;border:1px solid #503065;border-radius:7px;
-  padding:5px 7px;font-size:10px;
+  padding:5px 7px;font-size:10px;white-space:nowrap
 }
-.card h3{font-size:16px;overflow-wrap:anywhere;margin:17px 0 8px}
+.card h3{font-size:15px;overflow-wrap:anywhere;margin:17px 0 8px}
 .desc{font-size:13px;color:var(--muted);min-height:40px}
-.meta{font-size:11px;color:#a997b8;margin:13px 0}
+.meta{font-size:11px;color:#a997b8;margin:13px 0;overflow-wrap:anywhere}
 .download{
   display:block;text-align:center;text-decoration:none;
   background:linear-gradient(100deg,#9143d5,#6425a5);
   color:white;font-weight:bold;font-size:13px;
-  padding:12px;border-radius:9px;
+  padding:12px;border-radius:9px
 }
 .download:hover{filter:brightness(1.2)}
 .empty{
   display:none;text-align:center;padding:35px;
-  color:var(--muted);border:1px dashed var(--line);border-radius:12px;
+  color:var(--muted);border:1px dashed var(--line);border-radius:12px
 }
+.message{color:var(--muted);font-size:13px;padding:18px 0}
 footer{
   margin-top:50px;padding:25px 0;text-align:center;
   border-top:1px solid var(--line);font-size:12px;
-  color:#897994;line-height:1.8;
+  color:#897994;line-height:1.8
 }
 footer strong{color:#c084fc}
 @media(max-width:720px){
@@ -133,174 +136,207 @@ footer strong{color:#c084fc}
   <section class="hero">
     <div class="eyebrow">WINDOWS UTILITIES / FILE CENTER</div>
     <h1>ENTER THE<br><span>VOID.</span></h1>
-    <p class="muted">
-      Scripts, tools and utilities. Your files, organized in one place.
-    </p>
+    <p class="muted">Your files, organized in one place.</p>
     <label class="search">
       <span>⌕</span>
       <input id="search" type="search"
-        placeholder="Search tools or extensions..."
-        aria-label="Search tools">
+        placeholder="Search files or extensions..."
+        aria-label="Search files">
     </label>
   </section>
 
   <section>
     <div class="sectionhead">
-      <h2>Available Tools</h2>
-      <span id="count">0 files</span>
+      <h2>Available Files</h2>
+      <span id="count">Loading...</span>
     </div>
 
     <div class="filters" id="filters">
       <button class="filter active" data-cat="all">All Files</button>
       <button class="filter" data-cat="bat">.BAT</button>
       <button class="filter" data-cat="ps1">.PS1</button>
-      <button class="filter" data-cat="vbm">.VBM</button>
+      <button class="filter" data-cat="vbs">.VBS</button>
       <button class="filter" data-cat="inf">.INF</button>
-      <button class="filter" data-cat="other">Other</button>
     </div>
 
+    <p id="message" class="message">Connecting to GitHub...</p>
     <div class="grid" id="files"></div>
-    <div class="empty" id="empty">No matching tools found.</div>
+    <div class="empty" id="empty">No matching files found.</div>
   </section>
 </main>
 
 <footer>
   <strong>JAMINDANG FILES</strong><br>
   VOID TOOLS ARCHIVE · Made for the community.<br>
-  Download only files you trust. Review scripts before running them.
+  Check files before downloading or running scripts.
 </footer>
 
 <script>
-// ===========================================
-// ADD YOUR FILES HERE
-// cat: bat, ps1, vbm, inf, or other
-// url: your external file-sharing URL
-// ===========================================
+const OWNER = "gilbertojamindang-netizen";
+const REPO = "V-id-jamindang";
+const ALLOWED = [".bat", ".ps1", ".inf", ".vbs"];
 
+const filesElement = document.getElementById("files");
+const countElement = document.getElementById("count");
+const searchElement = document.getElementById("search");
+const emptyElement = document.getElementById("empty");
+const messageElement = document.getElementById("message");
 
-const fileList = [
-  {
-    name: "Batch Script",
-    cat: "bat",
-    ext: ".BAT",
-    size: "Check file size",
-    desc: "Windows batch script. Review its commands before running.",
-    url: ""
-  },
-  {
-    name: "PowerShell Script",
-    cat: "ps1",
-    ext: ".PS1",
-    size: "Check file size",
-    desc: "Windows PowerShell script. Review its contents before running.",
-    url: ""
-  },
-  {
-    name: "Windows Setup Information",
-    cat: "inf",
-    ext: ".INF",
-    size: "Check file size",
-    desc: "Windows configuration information file. Check its settings first.",
-    url: ""
-  },
-  {
-    name: "Visual Basic Script",
-    cat: "vbs",
-    ext: ".VBS",
-    size: "Check file size",
-    desc: "Windows VBScript file. Inspect the script before running.",
-    url: ""
-  }
-];
+let fileList = [];
+let activeCategory = "all";
 
-
-const area = document.getElementById("files");
-const search = document.getElementById("search");
-const count = document.getElementById("count");
-const empty = document.getElementById("empty");
-let activeCat = "all";
-
-function safeText(value){
-  return String(value).replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",
-    '"':"&quot;","'":"&#39;"
-  })[c]);
+function getExtension(name) {
+  const dot = name.lastIndexOf(".");
+  return dot >= 0 ? name.slice(dot).toLowerCase() : "";
 }
 
-function validURL(value){
-  try{
-    const u = new URL(value);
-    return u.protocol === "https:" || u.protocol === "http:";
-  }catch{
-    return false;
-  }
+function formatSize(bytes) {
+  if (bytes == null) return "Size unavailable";
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / 1048576).toFixed(2) + " MB";
 }
 
-function render(){
-  const term = search.value.trim().toLowerCase();
+function renderFiles() {
+  const query = searchElement.value.trim().toLowerCase();
 
-  const list = fileList.filter(f => {
-    const catMatch = activeCat === "all" ||
-      (activeCat === "other"
-        ? !["bat","ps1","vbm","inf"].includes(f.cat)
-        : f.cat === activeCat);
+  const filtered = fileList.filter(file => {
+    const categoryMatch =
+      activeCategory === "all" || file.cat === activeCategory;
+    const searchMatch =
+      file.name.toLowerCase().includes(query) ||
+      file.ext.toLowerCase().includes(query) ||
+      file.path.toLowerCase().includes(query);
 
-    const haystack = [
-      f.name, f.ext, f.desc, f.cat
-    ].join(" ").toLowerCase();
-
-    return catMatch && haystack.includes(term);
+    return categoryMatch && searchMatch;
   });
 
-  area.innerHTML = list.map(f => {
-    const ok = validURL(f.url);
-    const href = ok ? safeText(f.url) : "#";
+  filesElement.replaceChildren();
+  countElement.textContent = filtered.length + " files";
+  emptyElement.style.display = filtered.length ? "none" : "block";
 
-    return `
-      <article class="card">
-        <div class="top">
-          <div class="fileicon">${safeText(f.ext)}</div>
-          <span class="ext">${safeText(f.ext)}</span>
-        </div>
-        <h3>${safeText(f.name)}</h3>
-        <p class="desc">${safeText(f.desc)}</p>
-        <div class="meta">
-          FILE SIZE: ${safeText(f.size)}
-        </div>
-        <a class="download" href="${href}"
-          ${ok ? 'target="_blank" rel="noopener noreferrer"' : ""}
-          data-ready="${ok}">
-          ↓ &nbsp; Download File
-        </a>
-      </article>`;
-  }).join("");
+  for (const file of filtered) {
+    const card = document.createElement("article");
+    card.className = "card";
 
-  count.textContent = `${list.length} file${list.length === 1 ? "" : "s"}`;
-  empty.style.display = list.length ? "none" : "block";
+    const top = document.createElement("div");
+    top.className = "top";
+
+    const icon = document.createElement("div");
+    icon.className = "fileicon";
+    icon.textContent = file.ext.slice(1).toUpperCase();
+
+    const badge = document.createElement("span");
+    badge.className = "ext";
+    badge.textContent = file.ext.toUpperCase();
+
+    top.append(icon, badge);
+
+    const title = document.createElement("h3");
+    title.textContent = file.name;
+
+    const description = document.createElement("p");
+    description.className = "desc";
+    description.textContent = file.path.includes("/")
+      ? "Folder: " + file.path.slice(0, file.path.lastIndexOf("/"))
+      : "File in repository root.";
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = formatSize(file.size);
+
+    const link = document.createElement("a");
+    link.className = "download";
+    link.href = file.downloadUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "↓  Download";
+
+    card.append(top, title, description, meta, link);
+    filesElement.appendChild(card);
+  }
 }
 
-document.getElementById("filters").addEventListener("click", e => {
-  const btn = e.target.closest("[data-cat]");
-  if(!btn) return;
+document.getElementById("filters").addEventListener("click", event => {
+  const button = event.target.closest("button[data-cat]");
+  if (!button) return;
 
-  activeCat = btn.dataset.cat;
-  document.querySelectorAll(".filter").forEach(b =>
-    b.classList.toggle("active", b === btn)
-  );
-  render();
+  activeCategory = button.dataset.cat;
+
+  document.querySelectorAll(".filter").forEach(item => {
+    item.classList.toggle("active", item === button);
+  });
+
+  renderFiles();
 });
 
-search.addEventListener("input", render);
+searchElement.addEventListener("input", renderFiles);
 
-area.addEventListener("click", e => {
-  const link = e.target.closest("[data-ready='false']");
-  if(!link) return;
+async function loadFiles() {
+  messageElement.textContent = "Loading files from GitHub...";
 
-  e.preventDefault();
-  alert("This file has no valid download link yet. Add its HTTPS link in fileList.");
-});
+  try {
+    let response;
+    let branch = "main";
 
-render();
+    response = await fetch(
+      `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${branch}?recursive=1`
+    );
+
+    if (!response.ok) {
+      branch = "master";
+      response = await fetch(
+        `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${branch}?recursive=1`
+      );
+    }
+
+    if (!response.ok) {
+      throw new Error("GitHub repository could not be loaded.");
+    }
+
+    const data = await response.json();
+
+    if (data.truncated) {
+      throw new Error("GitHub returned an incomplete file list.");
+    }
+
+    fileList = (data.tree || [])
+      .filter(item => item.type === "blob")
+      .map(item => {
+        const path = item.path;
+        const name = path.split("/").pop();
+        const ext = getExtension(name);
+
+        return {
+          name,
+          path,
+          ext,
+          cat: ext.slice(1),
+          size: item.size,
+          downloadUrl:
+            `https://github.com/${OWNER}/${REPO}/raw/refs/heads/${branch}/` +
+            path.split("/").map(encodeURIComponent).join("/") +
+            "?download=1"
+        };
+      })
+      .filter(file => ALLOWED.includes(file.ext))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    messageElement.textContent = fileList.length
+      ? "Files loaded from GitHub."
+      : "No .BAT, .PS1, .INF, or .VBS files were found.";
+
+    renderFiles();
+  } catch (error) {
+    messageElement.textContent =
+      "Could not load files. Check the repository name, internet connection, and GitHub API availability.";
+    countElement.textContent = "Unavailable";
+    filesElement.replaceChildren();
+    emptyElement.style.display = "none";
+  }
+}
+
+loadFiles();
 </script>
 </body>
 </html>
