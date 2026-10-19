@@ -4,669 +4,127 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#050505">
-
-<title>VØID.NET — DIGITAL ARCHIVE</title>
-
+<title>VØID.NET // Archive</title>
 <style>
-:root {
-  color-scheme: dark;
-  --bg: #050505;
-  --white: #f5f5f5;
-  --muted: #9a9a9a;
-  --line: #292929;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--white);
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
-}
-
-body:before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10;
-  opacity: .12;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0 3px,
-    rgba(255,255,255,.24) 4px,
-    transparent 5px
-  );
-  mix-blend-mode: screen;
-}
-
-.wrap {
-  width: min(100% - 32px, 1050px);
-  margin: auto;
-  position: relative;
-  z-index: 2;
-}
-
-header {
-  padding: 28px 0 23px;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.logo {
-  font-weight: 950;
-  letter-spacing: .14em;
-  font-size: clamp(23px, 5vw, 36px);
-  position: relative;
-  display: inline-block;
-}
-
-.logo:before,
-.logo:after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.logo:before {
-  color: #999;
-  clip-path: inset(0 0 55% 0);
-  transform: translate(-2px, 1px);
-  animation: glitchA 3s infinite linear alternate-reverse;
-}
-
-.logo:after {
-  color: #fff;
-  clip-path: inset(60% 0 0 0);
-  transform: translate(2px, -1px);
-  animation: glitchB 2.4s infinite linear alternate-reverse;
-}
-
-@keyframes glitchA {
-  0%, 90%, 100% {
-    clip-path: inset(0 0 55% 0);
-    transform: translate(-2px, 1px);
-  }
-  92% {
-    clip-path: inset(18% 0 35% 0);
-    transform: translate(5px, -1px);
-  }
-  95% {
-    clip-path: inset(40% 0 20% 0);
-    transform: translate(-4px, 1px);
-  }
-}
-
-@keyframes glitchB {
-  0%, 88%, 100% {
-    clip-path: inset(60% 0 0 0);
-    transform: translate(2px, -1px);
-  }
-  90% {
-    clip-path: inset(72% 0 8% 0);
-    transform: translate(-5px, 1px);
-  }
-  94% {
-    clip-path: inset(52% 0 25% 0);
-    transform: translate(4px, 0);
-  }
-}
-
-.status {
-  text-align: right;
-  color: var(--muted);
-  font: 10px/1.7 monospace;
-  letter-spacing: .12em;
-}
-
-.status i {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background: #fff;
-  border-radius: 50%;
-  margin-right: 7px;
-  box-shadow: 0 0 10px #fff;
-  animation: pulse 1.3s infinite;
-}
-
-@keyframes pulse {
-  50% {
-    opacity: .2;
-  }
-}
-
-.hero {
-  padding: 48px 0 24px;
-}
-
-.kicker {
-  font: 11px monospace;
-  letter-spacing: .22em;
-  color: var(--muted);
-}
-
-h1 {
-  font-size: clamp(38px, 9vw, 82px);
-  line-height: .88;
-  letter-spacing: -.06em;
-  margin: 17px 0;
-  font-weight: 950;
-}
-
-h1 span {
-  display: block;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--white);
-  margin-top: 9px;
-}
-
-.intro {
-  color: #aaa;
-  max-width: 650px;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.stats {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-top: 22px;
-  font: 10px monospace;
-  letter-spacing: .1em;
-  color: #aaa;
-}
-
-.stats b {
-  color: #fff;
-}
-
-.toolbar {
-  display: grid;
-  grid-template-columns: 1fr 190px;
-  gap: 10px;
-  margin: 28px 0 13px;
-}
-
-input,
-select {
-  width: 100%;
-  min-width: 0;
-  background: #0b0b0b;
-  color: #fff;
-  border: 1px solid #343434;
-  padding: 14px;
-  font: 12px monospace;
-  border-radius: 0;
-  outline: none;
-}
-
-input:focus,
-select:focus {
-  border-color: #fff;
-  box-shadow: 0 0 0 1px #fff;
-}
-
-.filters {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-
-.filter {
-  background: #090909;
-  color: #aaa;
-  border: 1px solid #333;
-  padding: 9px 12px;
-  font: 10px monospace;
-  letter-spacing: .1em;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.filter.active,
-.filter:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  padding-bottom: 35px;
-}
-
-.file {
-  border: 1px solid #292929;
-  background: linear-gradient(135deg, #111, #070707 65%);
-  padding: 17px;
-  min-width: 0;
-  position: relative;
-  overflow: hidden;
-  transition: border-color .2s, transform .2s;
-}
-
-.file:before {
-  content: "";
-  position: absolute;
-  top: -20%;
-  bottom: -20%;
-  left: -55%;
-  width: 26%;
-  background: #fff;
-  opacity: .16;
-  transform: skewX(-25deg);
-  animation: cardStreak 5.2s infinite;
-}
-
-.file:nth-child(3n):before {
-  animation-delay: 1.4s;
-}
-
-.file:nth-child(4n):before {
-  animation-delay: 2.7s;
-}
-
-@keyframes cardStreak {
-  0%, 65% {
-    left: -55%;
-    opacity: 0;
-  }
-  70% {
-    opacity: .5;
-  }
-  84%, 100% {
-    left: 140%;
-    opacity: 0;
-  }
-}
-
-.file:hover {
-  border-color: #eee;
-  transform: translateY(-2px);
-}
-
-.file-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  color: #888;
-  font: 10px monospace;
-}
-
-.file-index {
-  letter-spacing: .12em;
-}
-
-.tag {
-  border: 1px solid #444;
-  padding: 4px 6px;
-  white-space: nowrap;
-}
-
-.filename {
-  font: 700 14px/1.45 monospace;
-  overflow-wrap: anywhere;
-  margin: 16px 0 8px;
-  color: #f5f5f5;
-}
-
-.original {
-  font: 10px/1.5 monospace;
-  color: #777;
-  overflow-wrap: anywhere;
-  min-height: 15px;
-}
-
-.desc {
-  font: 10px/1.6 monospace;
-  color: #8c8c8c;
-  margin-top: 8px;
-  min-height: 16px;
-}
-
-.actions {
-  display: flex;
-  align-items: stretch;
-  gap: 7px;
-  margin-top: 17px;
-}
-
-.download {
-  flex: 1;
-  min-width: 0;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  border: 1px solid #fff;
-  background: #f5f5f5;
-  color: #050505;
-  padding: 14px 8px;
-  font: 900 11px monospace;
-  letter-spacing: .11em;
-  text-align: center;
-  cursor: pointer;
-  transition: color .2s, background .2s, transform .2s;
-}
-
-.download:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: -30%;
-  bottom: -30%;
-  left: -45%;
-  width: 30%;
-  background: #050505;
-  transform: skewX(-24deg);
-  animation: buttonStreak 2.7s infinite;
-}
-
-.download:after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0 5px,
-    rgba(0,0,0,.15) 6px 7px
-  );
-  opacity: .7;
-}
-
-.download:hover {
-  background: #050505;
-  color: #fff;
-  transform: translateY(-1px);
-  animation: jitter .18s steps(2) infinite;
-}
-
-.download:before {
-  pointer-events: none;
-}
-
-.download:hover:before {
-  background: #fff;
-}
-
-.download:active {
-  transform: scale(.97);
-}
-
-@keyframes buttonStreak {
-  0%, 55% {
-    left: -45%;
-    opacity: 0;
-  }
-  60% {
-    opacity: 1;
-  }
-  83%, 100% {
-    left: 140%;
-    opacity: 0;
-  }
-}
-
-@keyframes jitter {
-  0% { translate: 0 0; }
-  25% { translate: -1px 0; }
-  50% { translate: 1px 1px; }
-  75% { translate: 1px -1px; }
-}
-
-.copy {
-  background: #050505;
-  color: #fff;
-  border: 1px solid #444;
-  padding: 0 11px;
-  font: 10px monospace;
-  cursor: pointer;
-  min-width: 91px;
-  transition: .2s;
-}
-
-.copy:hover {
-  border-color: #fff;
-  background: #fff;
-  color: #000;
-}
-
-.notice {
-  border: 1px solid #292929;
-  padding: 15px;
-  color: #999;
-  font: 10px/1.8 monospace;
-  margin: 0 0 34px;
-}
-
-.notice strong {
-  color: #eee;
-}
-
-footer {
-  border-top: 1px solid var(--line);
-  padding: 20px 0 30px;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  color: #777;
-  font: 10px monospace;
-  letter-spacing: .1em;
-}
-
-.empty {
-  display: none;
-  color: #aaa;
-  font: 12px monospace;
-  padding: 25px 0;
-}
-
-@media(max-width:650px) {
-  .wrap {
-    width: min(100% - 24px, 1050px);
-  }
-
-  header {
-    padding: 22px 0 18px;
-  }
-
-  .status {
-    font-size: 8px;
-  }
-
-  .hero {
-    padding-top: 36px;
-  }
-
-  .toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .list {
-    grid-template-columns: 1fr;
-  }
-
-  .file {
-    padding: 15px;
-  }
-
-  .filename {
-    font-size: 13px;
-  }
-
-  footer {
-    flex-direction: column;
-  }
-
-  .copy {
-    min-width: 86px;
-  }
-
-  .download {
-    font-size: 10px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *,
-  *:before,
-  *:after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-  }
-}
+:root{--bg:#050505;--panel:#0d0d0d;--line:#292929;--text:#f2f2f2;--muted:#929292;--accent:#fff;--warn:#c9a86a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 3px,#777 4px,transparent 5px);z-index:5}
+.wrap{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:36px 0 56px}
+header{border-bottom:1px solid var(--line);padding:8px 0 26px;margin-bottom:24px}
+.brand{font-size:clamp(34px,8vw,64px);font-weight:900;letter-spacing:-3px;line-height:1;text-shadow:2px 0 #777,-2px 0 #444;animation:flicker 5s infinite}
+.brand span{font-size:.35em;letter-spacing:3px;vertical-align:top;color:var(--muted);text-shadow:none}
+.sub{color:var(--muted);letter-spacing:2px;font-size:11px;margin-top:14px}
+.status{display:inline-flex;align-items:center;gap:8px;margin-top:18px;border:1px solid var(--line);padding:7px 10px;color:#cfcfcf;font-size:11px}
+.dot{width:7px;height:7px;background:#bdbdbd;border-radius:50%;box-shadow:0 0 9px #aaa}
+.toolbar{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px}
+input,select{width:100%;background:#0b0b0b;border:1px solid var(--line);color:var(--text);padding:13px 14px;font:inherit;outline:none}
+input:focus,select:focus{border-color:#aaa}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{background:#0a0a0a;border:1px solid var(--line);color:#aaa;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer}
+.filter.active,.filter:hover{color:#000;background:#eee;border-color:#eee}
+.summary{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px;letter-spacing:1px;margin:18px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card{min-width:0;background:linear-gradient(140deg,#101010,#080808);border:1px solid var(--line);padding:15px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:#777;transform:translateY(-1px)}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:12px}
+.num{color:#777;font-size:11px}
+.tag{border:1px solid #444;padding:3px 6px;color:#aaa;font-size:9px;letter-spacing:1px;white-space:nowrap}
+.tag.ready{border-color:#777;color:#eee}
+.tag.review{border-color:#66563c;color:var(--warn)}
+.filename{font-size:14px;font-weight:700;overflow-wrap:anywhere;margin-bottom:6px}
+.desc{font-size:11px;color:var(--muted);min-height:34px;margin-bottom:14px}
+.actions{display:flex;gap:8px}
+.btn{display:inline-block;text-align:center;text-decoration:none;background:#eee;color:#050505;border:1px solid #eee;padding:9px 10px;font:700 11px ui-monospace,monospace;cursor:pointer;flex:1}
+.btn:hover{background:#ccc}
+.btn.secondary{background:transparent;color:#ddd;border-color:#444}
+.btn.secondary:hover{border-color:#aaa}
+.btn.reviewbtn{background:#15120d;color:#d7c39e;border-color:#66563c}
+.note{border:1px solid var(--line);padding:14px;margin-top:22px;color:var(--muted);font-size:11px}
+.note strong{color:#ddd}
+footer{border-top:1px solid var(--line);margin-top:28px;padding-top:16px;color:#666;font-size:10px;letter-spacing:1px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.empty{display:none;padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);grid-column:1/-1}
+@keyframes flicker{0%,94%,96%,98%,100%{opacity:1}95%,97%{opacity:.78}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding-top:25px}.desc{min-height:0}.brand{letter-spacing:-2px}}
 </style>
 </head>
-
 <body>
 <div class="wrap">
-
 <header>
-  <div class="logo" data-text="VØID.NET">VØID.NET</div>
-
-  <div class="status">
-    <i></i>VØID ARCHIVE<br>
-    MONOCHROME // 001
-  </div>
+  <div class="brand">VØID.NET <span>ARCHIVE_01</span></div>
+  <div class="sub">DIGITAL FILE INDEX // SCHOOL PROJECT DEMO</div>
+  <div class="status"><i class="dot"></i> ARCHIVE INDEX ONLINE</div>
 </header>
 
-<section class="hero">
-  <div class="kicker">[ VØID DIGITAL DIRECTORY ]</div>
-
-  <h1>VØID<span>ARCHIVE_</span></h1>
-
-  <p class="intro">
-    Welcome to VØID.NET — a monochrome digital archive.
-    Search files, filter by extension, copy filenames,
-    and explore the interface.
-  </p>
-
-  <div class="stats">
-    <span>FILES: <b>22</b></span>
-    <span>MODE: <b>BLACK / WHITE</b></span>
-    <span>STATUS: <b>ONLINE</b></span>
-  </div>
-</section>
-
 <div class="toolbar">
-  <input
-    id="search"
-    type="search"
-    placeholder="SEARCH FILES..."
-    aria-label="Search files"
-  >
-
-  <select id="type" aria-label="Filter by file type">
-    <option value="all">ALL FILE TYPES</option>
-    <option value="bat">.BAT</option>
-    <option value="ps1">.PS1</option>
-    <option value="vbs">.VBS</option>
-    <option value="inf">.INF</option>
-    <option value="vmx">.VMX</option>
-  </select>
+  <input id="search" type="search" placeholder="Search filenames..." aria-label="Search filenames">
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="all">ALL FILES</button>
+    <button class="filter" data-filter="bat">.BAT</button>
+    <button class="filter" data-filter="ps1">.PS1</button>
+    <button class="filter" data-filter="vbs">.VBS</button>
+    <button class="filter" data-filter="vmx">.VMX</button>
+    <button class="filter" data-filter="inf">.INF</button>
+  </div>
 </div>
-
-<div class="filters">
-  <button class="filter active" data-filter="all">ALL FILES</button>
-  <button class="filter" data-filter="bat">BATCH</button>
-  <button class="filter" data-filter="ps1">POWERSHELL</button>
-  <button class="filter" data-filter="vbs">VBSCRIPT</button>
-  <button class="filter" data-filter="other">OTHER</button>
+<div class="summary"><span id="count">20 FILES</span><span>SELECT A FILE TO CONTINUE</span></div>
+<div class="grid" id="grid"></div>
+<div class="note"><strong>PROJECT NOTE //</strong> This page is an archive-style HTML interface. Links marked <strong>REVIEW REQUIRED</strong> are listed for catalog/demo purposes only and are not linked to unreviewed system-modifying scripts. Review scripts with your teacher or in a safe test environment before distributing them.</div>
+<footer><span>VØID.NET © ARCHIVE INTERFACE</span><span>BUILD 01.0 // HTML / CSS / JS</span></footer>
 </div>
-
-<div id="list" class="list"></div>
-
-<div id="empty" class="empty">
-  NO MATCHING FILES FOUND_
-</div>
-
-<div class="notice">
-  <strong>VØID ARCHIVE //</strong>
-  This is a monochrome digital file directory.
-  Download controls are visual previews until verified
-  download URLs are configured. Review files before
-  running them, particularly scripts that change system
-  security settings, accounts, or system behavior.
-</div>
-
-<footer>
-  <span>VØID.NET // DIGITAL ARCHIVE</span>
-  <span>BLACK / WHITE / NO SIGNAL</span>
-</footer>
-
-</div>
-
 <script>
-"use strict";
-
 const files = [
-  {name:"01_clean_vm.bat",original:"vmclean.bat",type:"bat"},
-  {name:"02_cloud_bypass.ps1",original:"cloudbypass.ps1",type:"ps1"},
-  {name:"03_spoof_hwid.ps1",original:"anti-detect.ps1",type:"ps1"},
-  {name:"04_uac_off.bat",original:"uac_off.bat",type:"bat"},
-  {name:"05_bypass_amsi.ps1",original:"amsi_bypass.ps1",type:"ps1"},
-  {name:"06_defender_off.bat",original:"defender_off.bat",type:"bat"},
-  {name:"07_kill_telemetry.bat",original:"kill_telemetry.bat",type:"bat"},
-  {name:"08_killac.bat",original:"killac.bat",type:"bat"},
-  {name:"09_anti_shutdown.ps1",original:"anti-shutdownpc.ps1",type:"ps1"},
-  {name:"10_no_sleep.bat",original:"nosleep.bat",type:"bat"},
-  {name:"11_anti_idle.bat",original:"anti-idle.bat",type:"bat"},
-  {name:"12_start_watchdog.vbs",original:"run_watchdog.vbs",type:"vbs"},
-  {name:"13_watchdog.bat",original:"watchdog.bat",type:"bat"},
-  {name:"14_freeze_timer.ps1",original:"freeze_cloud.ps1",type:"ps1"},
-  {name:"15_hide_proc.ps1",original:"hideproc.ps1",type:"ps1"},
-  {name:"16_noshot.ps1",original:"noshot.ps1",type:"ps1"},
-  {name:"17_stealth.bat",original:"stealth.bat",type:"bat"},
-  {name:"18_kick_spies.bat",original:"kick_intruders.bat",type:"bat"},
-  {name:"19_add_user.bat",original:"user.bat",type:"bat"},
-  {name:"99_panic_wipe.bat",original:"panic.bat",type:"bat"},
-  {name:"autorun.inf",original:"autorun.inf",type:"inf"},
-  {name:"cloudpc.vmx",original:"cloudpc.vmx",type:"vmx"}
+ {n:"01_clean_vm.bat",t:"bat",u:"https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file",safe:false,d:"Batch script — inspect contents before running."},
+ {n:"02_cloud_bypass.ps1",t:"ps1",u:"https://www.mediafire.com/file/iottqvyvzykfscb/02_cloud_bypass.ps1/file",safe:false,d:"PowerShell bypass-related script — review required."},
+ {n:"03_uac_off.bat",t:"bat",u:"https://www.mediafire.com/file/9gvuf6ezusg7ngq/03_uac_off.bat/file",safe:false,d:"May change Windows security settings — review required."},
+ {n:"04_spoof_hwid.ps1",t:"ps1",u:"https://www.mediafire.com/file/yzaqjj9pc8q0d1e/04_spoof_hwid.ps1/file",safe:false,d:"System identity modification — review required."},
+ {n:"05_bypass_amsi.ps1",t:"ps1",u:"https://www.mediafire.com/file/975i4bue6y9qhhg/05_bypass_amsi.ps1/file",safe:false,d:"Security-control bypass — review required."},
+ {n:"06_defender_off.bat",t:"bat",u:"https://www.mediafire.com/file/ye3qu4fun76ylxx/06_defender_off.bat/file",safe:false,d:"May disable antivirus protection — review required."},
+ {n:"07_kill_telemetry.bat",t:"bat",u:"https://www.mediafire.com/file/za5gvr8v1rfpnn0/07_kill_telemetry.bat/file",safe:false,d:"May alter system services or settings — review required."},
+ {n:"08_killac.bat",t:"bat",u:"https://www.mediafire.com/file/r2jbfbpng19dkpq/08_killac.bat/file",safe:false,d:"System process/service script — review required."},
+ {n:"09_anti_shutdown.ps1",t:"ps1",u:"https://www.mediafire.com/file/layjou0o52rpx1r/09_anti_shutdown.ps1/file",safe:false,d:"May interfere with normal system controls — review required."},
+ {n:"10_no_sleep.bat",t:"bat",u:"https://www.mediafire.com/file/40q39ayjbgtcdxp/10_no_sleep.bat/file",safe:false,d:"Power-management script — inspect contents first."},
+ {n:"11_anti_idle.bat",t:"bat",u:"https://www.mediafire.com/file/kef6d0z4e0lf2px/11_anti_idle.bat/file",safe:false,d:"May alter idle behavior — inspect contents first."},
+ {n:"12_start_watchdog.vbs",t:"vbs",u:"https://www.mediafire.com/file/y32u4o22tis0s7q/12_start_watchdog.vbs/file",safe:false,d:"Script launcher — review required."},
+ {n:"12_watchdog.bat",t:"bat",u:"https://www.mediafire.com/file/9b85fy6whvcmwif/12_watchdog.bat/file",safe:false,d:"Monitoring/automation script — review required."},
+ {n:"13_freeze_timer.ps1",t:"ps1",u:"https://www.mediafire.com/file/99fn26tlhqmflxg/13_freeze_timer.ps1/file",safe:false,d:"Timer/system behavior script — review required."},
+ {n:"14_hide_proc.ps1",t:"ps1",u:"https://www.mediafire.com/file/6zxyxfhn71o5iqq/14_hide_proc.ps1/file",safe:false,d:"Process-hiding behavior — review required."},
+ {n:"15_noshot.ps1",t:"ps1",u:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/15_noshot.ps1/file",safe:false,d:"May affect capture settings — review required."},
+ {n:"16_stealth.bat",t:"bat",u:"https://www.mediafire.com/file/jn50ueqkptb89rm/16_stealth.bat/file",safe:false,d:"Stealth-related script — review required."},
+ {n:"17_kick_spies.bat",t:"bat",u:"https://www.mediafire.com/file/exb2kl9y7lby9m1/17_kick_spies.bat/file",safe:false,d:"May change system processes/settings — review required."},
+ {n:"18_add_user.bat",t:"bat",u:"https://www.mediafire.com/file/vlgsadujbez7060/18_add_user.bat/file",safe:false,d:"May create a Windows account — review required."},
+ {n:"cloudpc.vmx",t:"vmx",u:"https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file",safe:true,d:"Virtual machine configuration file. Check its settings before opening."},
+ {n:"autorun.inf",t:"inf",u:"https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file",safe:false,d:"Autorun configuration can reference programs — review required."}
 ];
-
-const list = document.getElementById("list");
-const search = document.getElementById("search");
-const typeSelect = document.getElementById("type");
-const empty = document.getElementById("empty");
-
-let activeFilter = "all";
-
-function escapeHTML(s) {
-  return s.replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[c]));
+const grid=document.getElementById('grid'), search=document.getElementById('search'), count=document.getElementById('count');
+let active='all';
+function render(){
+ const q=search.value.trim().toLowerCase();
+ const shown=files.filter(f=>(active==='all'||f.t===active)&&f.n.toLowerCase().includes(q));
+ grid.innerHTML='';
+ shown.forEach((f,i)=>{
+   const card=document.createElement('article');card.className='card';
+   const top=document.createElement('div');top.className='top';
+   const num=document.createElement('span');num.className='num';num.textContent='FILE_'+String(files.indexOf(f)+1).padStart(2,'0');
+   const tag=document.createElement('span');tag.className='tag '+(f.safe?'ready':'review');tag.textContent=f.safe?'LINK AVAILABLE':'REVIEW REQUIRED';
+   top.append(num,tag);
+   const name=document.createElement('div');name.className='filename';name.textContent=f.n;
+   const desc=document.createElement('div');desc.className='desc';desc.textContent=f.d;
+   const actions=document.createElement('div');actions.className='actions';
+   if(f.safe){
+     const a=document.createElement('a');a.className='btn';a.href=f.u;a.target='_blank';a.rel='noopener noreferrer';a.textContent='OPEN DOWNLOAD PAGE';actions.append(a);
+   }else{
+     const b=document.createElement('button');b.className='btn reviewbtn';b.textContent='REVIEW REQUIRED';b.title='This file is listed for the project index but not linked for download until its contents are reviewed.';b.addEventListener('click',()=>alert('This script needs its contents reviewed before a download link is enabled. For your school submission, you can show this archive catalog and explain the safety review status.'));actions.append(b);
+   }
+   const copy=document.createElement('button');copy.className='btn secondary';copy.textContent='COPY NAME';copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(f.n);copy.textContent='COPIED';setTimeout(()=>copy.textContent='COPY NAME',1200)}catch(e){prompt('Copy filename:',f.n)}});actions.append(copy);
+   card.append(top,name,desc,actions);grid.append(card);
+ });
+ const empty=document.createElement('div');empty.className='empty';empty.textContent='NO MATCHING FILES';empty.style.display=shown.length?'none':'block';grid.append(empty);
+ count.textContent=shown.length+' / '+files.length+' FILES';
 }
-
-function render() {
-  const q = search.value.trim().toLowerCase();
-  const t = typeSelect.value;
-
-  const shown = files.filter(f =>
-    (
-     
+search.addEventListener('input',render);
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');active=b.dataset.filter;render()}));
+render();
+</script>
+</body>
+</html>
