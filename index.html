@@ -1,343 +1,140 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#090611">
 <title>Jamindang Files | Void Archive</title>
 <style>
-:root{
-  --bg:#050505;
-  --panel:#0b0b0b;
-  --line:#29202f;
-  --purple:#a855f7;
-  --text:#f7f0ff;
-  --muted:#a99ab8;
-}
+:root{color-scheme:dark;--bg:#000;--panel:#0b0b0b;--line:#282828;--text:#fff;--muted:#aaa;--glow:#fff}
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Helvetica,sans-serif
-}
-.container{width:min(1100px,92%);margin:auto}
-header{background:#070707;border-bottom:1px solid var(--line)}
-nav{
-  min-height:76px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px
-}
-.brand{display:flex;align-items:center;gap:12px;font-weight:900}
-.logo{
-  display:grid;place-items:center;width:44px;height:44px;
-  border-radius:12px;background:linear-gradient(135deg,#bd77ff,#6021a5);
-  box-shadow:0 0 22px #8b32d544;font-size:24px
-}
-.brand small{
-  display:block;color:#b783ef;font-size:10px;
-  letter-spacing:2px;margin-top:5px
-}
-.status{color:#c4a0e8;font-size:11px}
-.hero{
-  padding:55px 0 35px;text-align:center;
-  background:radial-gradient(ellipse at 50% 0%,#6525a822,transparent 70%)
-}
-.eyebrow{font-size:11px;letter-spacing:3px;color:#c084fc}
-h1{font-size:clamp(36px,8vw,62px);line-height:1.06;margin:16px 0}
-h1 span{color:#bd83ff}
-p{line-height:1.65}
-.muted{color:var(--muted)}
-.search{
-  display:flex;align-items:center;gap:10px;margin:25px auto 0;
-  border:1px solid var(--line);background:#0c0c0c;
-  padding:6px 14px;border-radius:12px;max-width:650px
-}
-.search input{
-  width:100%;min-width:0;padding:12px 0;
-  border:0;outline:0;background:transparent;color:white
-}
-.search input::placeholder{color:#83718f}
-.sectionhead{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin:25px 0 16px
-}
-h2{font-size:20px;margin:0}
-#count{color:var(--muted);font-size:12px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.filter{
-  padding:10px 13px;border:1px solid var(--line);
-  border-radius:25px;background:#0b0b0b;color:#c8b8d6;cursor:pointer
-}
-.filter.active,.filter:hover{
-  color:white;background:#512078;border-color:var(--purple)
-}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{
-  min-width:0;background:linear-gradient(145deg,#111,#090909);
-  border:1px solid var(--line);border-radius:15px;padding:17px;
-  transition:.2s
-}
-.card:hover{border-color:#9845ce;transform:translateY(-2px)}
-.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.fileicon{
-  width:48px;height:48px;display:grid;place-items:center;
-  border-radius:12px;background:#21132c;color:#d9b6ff;
-  font-size:12px;font-weight:bold;border:1px solid #503065
-}
-.ext{
-  color:#d0a7fa;border:1px solid #503065;border-radius:7px;
-  padding:5px 7px;font-size:10px;white-space:nowrap
-}
-.card h3{font-size:15px;overflow-wrap:anywhere;margin:17px 0 8px}
-.desc{font-size:13px;color:var(--muted);min-height:40px}
-.meta{font-size:11px;color:#a997b8;margin:13px 0;overflow-wrap:anywhere}
-.download{
-  display:block;text-align:center;text-decoration:none;
-  background:linear-gradient(100deg,#9143d5,#6425a5);
-  color:white;font-weight:bold;font-size:13px;
-  padding:12px;border-radius:9px
-}
-.download:hover{filter:brightness(1.2)}
-.empty{
-  display:none;text-align:center;padding:35px;
-  color:var(--muted);border:1px dashed var(--line);border-radius:12px
-}
-.message{color:var(--muted);font-size:13px;padding:18px 0}
-footer{
-  margin-top:50px;padding:25px 0;text-align:center;
-  border-top:1px solid var(--line);font-size:12px;
-  color:#897994;line-height:1.8
-}
-footer strong{color:#c084fc}
-@media(max-width:720px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:480px){
-  .grid{grid-template-columns:1fr}
-  .hero{padding-top:38px}
-}
+body{margin:0;background:radial-gradient(ellipse at top,#151515 0%,#050505 38%,#000 76%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:auto;padding:28px 16px 60px}
+.hero{text-align:center;padding:30px 12px 24px}
+.eyebrow{color:#bbb;text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;font-weight:800}
+.hero h1{font-size:clamp(2rem,7vw,3.6rem);line-height:1.05;margin:10px 0;color:#fff;text-shadow:0 0 5px #fff9,0 0 18px #fff3}
+.hero p{max-width:620px;margin:12px auto;color:var(--muted)}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.pill{border:1px solid #303030;background:#0b0b0b;border-radius:999px;padding:6px 12px;color:#eee;font-size:.85rem}
+.toolbar{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0 16px}
+.search{width:100%;border:1px solid #333;background:#080808;color:#fff;padding:14px 16px;border-radius:14px;font:inherit;outline:none}
+.search:focus{border-color:#aaa;box-shadow:0 0 0 2px #fff2,0 0 12px #fff2}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{border:1px solid #303030;background:#0c0c0c;color:#bbb;border-radius:999px;padding:8px 13px;font:inherit;cursor:pointer}
+.filter.active,.filter:hover{background:#292929;border-color:#888;color:#fff;box-shadow:0 0 9px #fff1}
+.note{border:1px solid #333;background:#0b0b0b;color:#ccc;border-radius:12px;padding:12px 14px;margin:14px 0 20px;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:13px}
+.card{border:1px solid #262626;background:linear-gradient(145deg,#111,#070707);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:transform .15s,border-color .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);border-color:#777;box-shadow:0 0 16px #fff0a}
+.cardtop{display:flex;align-items:flex-start;gap:11px}
+.fileicon{width:42px;height:42px;flex:none;display:grid;place-items:center;background:#161616;border:1px solid #383838;border-radius:12px;color:#fff;font-size:.72rem;font-weight:900}
+.name{font-weight:750;overflow-wrap:anywhere}
+.meta{font-size:.8rem;color:#aaa;margin-top:3px}
+.desc{color:#bbb;font-size:.9rem;margin:0;flex:1}
+.actions{display:flex;gap:8px;margin-top:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:9px 12px;font:inherit;font-weight:700;border:1px solid #444;color:#fff;background:#161616;cursor:pointer}
+.btn.primary{background:#e8e8e8;border-color:#fff;color:#050505;flex:1;box-shadow:0 0 9px #fff2}
+.btn.primary:hover{background:#fff;box-shadow:0 0 14px #fff4}
+.btn.disabled{opacity:.55;cursor:not-allowed}
+.empty{padding:35px 12px;text-align:center;color:#aaa;border:1px dashed #333;border-radius:14px}
+.footer{text-align:center;color:#888;font-size:.8rem;margin-top:30px}
+@media(min-width:720px){.toolbar{grid-template-columns:1fr auto;align-items:center}.filters{justify-content:flex-end}}
 </style>
 </head>
 <body>
-<header>
-  <div class="container">
-    <nav>
-      <div class="brand">
-        <div class="logo">J</div>
-        <div>JAMINDANG FILES
-          <small>VOID TOOLS ARCHIVE</small>
-        </div>
-      </div>
-      <span class="status">● ARCHIVE</span>
-    </nav>
-  </div>
-</header>
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Private collection · Digital archive</div>
+    <h1>VOID ARCHIVE</h1>
+    <p>A searchable catalog of files shared by Jamindang. Search by filename or filter by file type.</p>
+    <div class="stats"><span class="pill">22 file entries</span><span class="pill">Dark / Purple UI</span><span class="pill">Mobile friendly</span></div>
+  </header>
 
-<main class="container">
-  <section class="hero">
-    <div class="eyebrow">WINDOWS UTILITIES / FILE CENTER</div>
-    <h1>ENTER THE<br><span>VOID.</span></h1>
-    <p class="muted">Your files, organized in one place.</p>
-    <label class="search">
-      <span>⌕</span>
-      <input id="search" type="search"
-        placeholder="Search files or extensions..."
-        aria-label="Search files">
-    </label>
-  </section>
-
-  <section>
-    <div class="sectionhead">
-      <h2>Available Files</h2>
-      <span id="count">Loading...</span>
-    </div>
-
+  <section class="toolbar" aria-label="Search and filters">
+    <input id="search" class="search" type="search" placeholder="🔎 Search files..." aria-label="Search files">
     <div class="filters" id="filters">
-      <button class="filter active" data-cat="all">All Files</button>
-      <button class="filter" data-cat="bat">.BAT</button>
-      <button class="filter" data-cat="ps1">.PS1</button>
-      <button class="filter" data-cat="vbs">.VBS</button>
-      <button class="filter" data-cat="inf">.INF</button>
+      <button class="filter active" data-filter="all">All files</button>
+      <button class="filter" data-filter=".bat">.BAT</button>
+      <button class="filter" data-filter=".ps1">.PS1</button>
+      <button class="filter" data-filter=".inf">.INF</button>
+      <button class="filter" data-filter=".vbs">.VBS</button>
+      <button class="filter" data-filter=".vmx">.VMX</button>
     </div>
-
-    <p id="message" class="message">Connecting to GitHub...</p>
-    <div class="grid" id="files"></div>
-    <div class="empty" id="empty">No matching files found.</div>
   </section>
+
+  <div class="note"><strong>Safety note:</strong> These are user-submitted file links; the contents have not been verified. Be cautious with scripts and configuration files, and don't run files unless you trust and understand what they do. Some entries are listed for reference only.</div>
+
+  <section id="fileGrid" class="grid" aria-live="polite"></section>
+  <div id="empty" class="empty" hidden>No matching files. Try another search or filter.</div>
+  <footer class="footer">VOID ARCHIVE · Use files responsibly</footer>
 </main>
-
-<footer>
-  <strong>JAMINDANG FILES</strong><br>
-  VOID TOOLS ARCHIVE · Made for the community.<br>
-  Check files before downloading or running scripts.
-</footer>
-
 <script>
-const OWNER = "gilbertojamindang-netizen";
-const REPO = "V-id-jamindang";
-const ALLOWED = [".bat", ".ps1", ".inf", ".vbs"];
-
-const filesElement = document.getElementById("files");
-const countElement = document.getElementById("count");
-const searchElement = document.getElementById("search");
-const emptyElement = document.getElementById("empty");
-const messageElement = document.getElementById("message");
-
-let fileList = [];
-let activeCategory = "all";
-
-function getExtension(name) {
-  const dot = name.lastIndexOf(".");
-  return dot >= 0 ? name.slice(dot).toLowerCase() : "";
-}
-
-function formatSize(bytes) {
-  if (bytes == null) return "Size unavailable";
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
-  return (bytes / 1048576).toFixed(2) + " MB";
-}
-
-function renderFiles() {
-  const query = searchElement.value.trim().toLowerCase();
-
-  const filtered = fileList.filter(file => {
-    const categoryMatch =
-      activeCategory === "all" || file.cat === activeCategory;
-    const searchMatch =
-      file.name.toLowerCase().includes(query) ||
-      file.ext.toLowerCase().includes(query) ||
-      file.path.toLowerCase().includes(query);
-
-    return categoryMatch && searchMatch;
-  });
-
-  filesElement.replaceChildren();
-  countElement.textContent = filtered.length + " files";
-  emptyElement.style.display = filtered.length ? "none" : "block";
-
-  for (const file of filtered) {
+const files = [
+  {name:"amsi_bypass.ps1",cat:".ps1",url:"https://www.mediafire.com/file/975i4bue6y9qhhg/amsi_bypass.ps1/file",safe:false},
+  {name:"anti-detect.ps1",cat:".ps1",url:"https://www.mediafire.com/file/yzaqjj9pc8q0d1e/anti-detect.ps1/file",safe:false},
+  {name:"anti-idle.bat",cat:".bat",url:"https://www.mediafire.com/file/kef6d0z4e0lf2px/anti-idle.bat/file",safe:true},
+  {name:"anti-shotdownpc.ps1",cat:".ps1",url:"https://www.mediafire.com/file/layjou0o52rpx1r/anti-shotdownpc.ps1/file",safe:true},
+  {name:"autorun.inf",cat:".inf",url:"https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file",safe:true},
+  {name:"cloudbypass.ps1",cat:".ps1",url:"https://www.mediafire.com/file/iottqvyvzykfscb/cloudbypass.ps1/file",safe:false},
+  {name:"cloudpc.vmx",cat:".vmx",url:"https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file",safe:true},
+  {name:"defender_off.bat",cat:".bat",url:"https://www.mediafire.com/file/ye3qu4fun76ylxx/defender_off.bat/file",safe:false},
+  {name:"kick_intruders.bat",cat:".bat",url:"https://www.mediafire.com/file/exb2kl9y7lby9m1/kick_intruders.bat/file",safe:false},
+  {name:"hideproc.ps1",cat:".ps1",url:"https://www.mediafire.com/file/6zxyxfhn71o5iqq/hideproc.ps1/file",safe:false},
+  {name:"killac.bat",cat:".bat",url:"https://www.mediafire.com/file/r2jbfbpng19dkpq/killac.bat/file",safe:false},
+  {name:"kill_telemetry.bat",cat:".bat",url:"https://www.mediafire.com/file/za5gvr8v1rfpnn0/kill_telemetry.bat/file",safe:true},
+  {name:"noshot.ps1",cat:".ps1",url:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/noshot.ps1/file",safe:true},
+  {name:"nosleep.bat",cat:".bat",url:"https://www.mediafire.com/file/40q39ayjbgtcdxp/nosleep.bat/file",safe:true},
+  {name:"panic.bat",cat:".bat",url:"https://www.mediafire.com/file/s7s18i1qx7jpe3c/panic.bat/file",safe:false},
+  {name:"run_watchdog.vbs",cat:".vbs",url:"https://www.mediafire.com/file/y32u4o22tis0s7q/run_watchdog.vbs/file",safe:false},
+  {name:"stealth.bat",cat:".bat",url:"https://www.mediafire.com/file/jn50ueqkptb89rm/stealth.bat/file",safe:false},
+  {name:"uac_off.bat",cat:".bat",url:"https://www.mediafire.com/file/9gvuf6ezusg7ngq/uac_off.bat/file",safe:false},
+  {name:"user.bat",cat:".bat",url:"https://www.mediafire.com/file/vlgsadujbez7060/user.bat/file",safe:true},
+  {name:"vmclean.bat",cat:".bat",url:"https://www.mediafire.com/file/8d8oa8zy53brb1x/vmclean.bat/file",safe:true},
+  {name:"watchdog.bat",cat:".bat",url:"https://www.mediafire.com/file/9b85fy6whvcmwif/watchdog.bat/file",safe:false},
+  {name:"freeze_cloud.ps1",cat:".ps1",url:"https://www.mediafire.com/file/99fn26tlhqmflxg/freeze_cloud.ps1/file",safe:false}
+];
+const descriptions = {
+  ".bat":"Windows batch file",
+  ".ps1":"PowerShell script",
+  ".inf":"Windows setup information file",
+  ".vbs":"VBScript file",
+  ".vmx":"Virtual machine configuration"
+};
+const search = document.getElementById("search");
+const grid = document.getElementById("fileGrid");
+const empty = document.getElementById("empty");
+let currentFilter = "all";
+function render(){
+  const q = search.value.trim().toLowerCase();
+  const visible = files.filter(f => (currentFilter === "all" || f.cat === currentFilter) && f.name.toLowerCase().includes(q));
+  grid.innerHTML = "";
+  visible.forEach(f => {
     const card = document.createElement("article");
     card.className = "card";
-
-    const top = document.createElement("div");
-    top.className = "top";
-
-    const icon = document.createElement("div");
-    icon.className = "fileicon";
-    icon.textContent = file.ext.slice(1).toUpperCase();
-
-    const badge = document.createElement("span");
-    badge.className = "ext";
-    badge.textContent = file.ext.toUpperCase();
-
-    top.append(icon, badge);
-
-    const title = document.createElement("h3");
-    title.textContent = file.name;
-
-    const description = document.createElement("p");
-    description.className = "desc";
-    description.textContent = file.path.includes("/")
-      ? "Folder: " + file.path.slice(0, file.path.lastIndexOf("/"))
-      : "File in repository root.";
-
-    const meta = document.createElement("div");
-    meta.className = "meta";
-    meta.textContent = formatSize(file.size);
-
-    const link = document.createElement("a");
-    link.className = "download";
-    link.href = file.downloadUrl;
-    link.removeAttribute("target");
-    link.removeAttribute("rel");
-    link.setAttribute("download", file.name);
-    link.textContent = "↓  Download";
-
-    card.append(top, title, description, meta, link);
-    filesElement.appendChild(card);
-  }
-}
-
-document.getElementById("filters").addEventListener("click", event => {
-  const button = event.target.closest("button[data-cat]");
-  if (!button) return;
-
-  activeCategory = button.dataset.cat;
-
-  document.querySelectorAll(".filter").forEach(item => {
-    item.classList.toggle("active", item === button);
+    const top = document.createElement("div"); top.className = "cardtop";
+    const icon = document.createElement("div"); icon.className = "fileicon"; icon.textContent = f.cat.replace(".","");
+    const info = document.createElement("div");
+    const name = document.createElement("div"); name.className = "name"; name.textContent = f.name;
+    const meta = document.createElement("div"); meta.className = "meta"; meta.textContent = f.cat.toUpperCase() + " · " + descriptions[f.cat];
+    info.append(name,meta); top.append(icon,info);
+    const desc = document.createElement("p"); desc.className = "desc";
+    desc.textContent = f.safe ? "User-submitted link. Review the file before use." : "Reference entry only — not enabled as a download in this catalog until its purpose is reviewed.";
+    const actions = document.createElement("div"); actions.className = "actions";
+    const link = document.createElement("a"); link.className = "btn " + (f.safe ? "primary" : "disabled");
+    if(f.safe){ link.href=f.url; link.target="_blank"; link.rel="noopener noreferrer"; link.textContent="Open file page"; }
+    else { link.href="#"; link.setAttribute("aria-disabled","true"); link.textContent="Not enabled"; link.addEventListener("click",e=>e.preventDefault()); }
+    const copy = document.createElement("button"); copy.className="btn"; copy.textContent="Copy link";
+    copy.addEventListener("click", async () => { try { await navigator.clipboard.writeText(f.url); copy.textContent="Copied!"; setTimeout(()=>copy.textContent="Copy link",1200); } catch { window.prompt("Copy this link:",f.url); } });
+    actions.append(link,copy); card.append(top,desc,actions); grid.append(card);
   });
-
-  renderFiles();
-});
-
-searchElement.addEventListener("input", renderFiles);
-
-async function loadFiles() {
-  messageElement.textContent = "Loading files from GitHub...";
-
-  try {
-    let response;
-    let branch = "main";
-
-    response = await fetch(
-      `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${branch}?recursive=1`
-    );
-
-    if (!response.ok) {
-      branch = "master";
-      response = await fetch(
-        `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${branch}?recursive=1`
-      );
-    }
-
-    if (!response.ok) {
-      throw new Error("GitHub repository could not be loaded.");
-    }
-
-    const data = await response.json();
-
-    if (data.truncated) {
-      throw new Error("GitHub returned an incomplete file list.");
-    }
-
-    fileList = (data.tree || [])
-      .filter(item => item.type === "blob")
-      .map(item => {
-        const path = item.path;
-        const name = path.split("/").pop();
-        const ext = getExtension(name);
-
-        return {
-          name,
-          path,
-          ext,
-          cat: ext.slice(1),
-          size: item.size,
-          downloadUrl:
-            `https://github.com/${OWNER}/${REPO}/raw/refs/heads/${branch}/` +
-            path.split("/").map(encodeURIComponent).join("/") +
-            "?download=1"
-        };
-      })
-      .filter(file => ALLOWED.includes(file.ext))
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    messageElement.textContent = fileList.length
-      ? "Files loaded from GitHub."
-      : "No .BAT, .PS1, .INF, or .VBS files were found.";
-
-    renderFiles();
-  } catch (error) {
-    messageElement.textContent =
-      "Could not load files. Check the repository name, internet connection, and GitHub API availability.";
-    countElement.textContent = "Unavailable";
-    filesElement.replaceChildren();
-    emptyElement.style.display = "none";
-  }
+  empty.hidden = visible.length !== 0;
 }
-
-loadFiles();
+search.addEventListener("input",render);
+document.querySelectorAll(".filter").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active"); currentFilter=btn.dataset.filter; render();
+}));
+render();
 </script>
 </body>
 </html>
