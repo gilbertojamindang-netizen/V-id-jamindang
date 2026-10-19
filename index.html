@@ -176,40 +176,43 @@ footer strong{color:#c084fc}
 // cat: bat, ps1, vbm, inf, or other
 // url: your external file-sharing URL
 // ===========================================
+
+
 const fileList = [
   {
-    name: "Example Batch Tool",
+    name: "Batch Script",
     cat: "bat",
     ext: ".BAT",
-    size: "Unknown",
-    desc: "Add a description of your batch tool.",
+    size: "Check file size",
+    desc: "Windows batch script. Review its commands before running.",
     url: ""
   },
   {
-    name: "Example PowerShell Tool",
+    name: "PowerShell Script",
     cat: "ps1",
     ext: ".PS1",
-    size: "Unknown",
-    desc: "Add a description of your PowerShell tool.",
+    size: "Check file size",
+    desc: "Windows PowerShell script. Review its contents before running.",
     url: ""
   },
   {
-    name: "Example VBM File",
-    cat: "vbm",
-    ext: ".VBM",
-    size: "Unknown",
-    desc: "Describe this file and its purpose.",
-    url: ""
-  },
-  {
-    name: "Example INF File",
+    name: "Windows Setup Information",
     cat: "inf",
     ext: ".INF",
-    size: "Unknown",
-    desc: "Add details about this configuration file.",
+    size: "Check file size",
+    desc: "Windows configuration information file. Check its settings first.",
+    url: ""
+  },
+  {
+    name: "Visual Basic Script",
+    cat: "vbs",
+    ext: ".VBS",
+    size: "Check file size",
+    desc: "Windows VBScript file. Inspect the script before running.",
     url: ""
   }
 ];
+
 
 const area = document.getElementById("files");
 const search = document.getElementById("search");
