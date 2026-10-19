@@ -1,171 +1,303 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Love You, Friend ❤️</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08050d">
+<title>Jamindang Files | Void Archive</title>
 <style>
-* {
-    box-sizing: border-box;
+:root{
+  --bg:#08050d;--panel:#100b18;--line:#30203d;
+  --purple:#a855f7;--text:#f7f0ff;--muted:#a99ab8;
 }
-
-body {
-    margin: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    font-family: Arial, sans-serif;
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
 }
-
-/* Main message */
-.love-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-
-    padding: 20px;
-    position: relative;
-    z-index: 10;
-
-    animation: pop 1s ease;
+.container{width:min(1000px,92%);margin:auto}
+header{
+  background:#0c0812;border-bottom:1px solid var(--line);
 }
-
-.love-title h1 {
-    margin: 0;
-    color: white;
-    font-size: clamp(32px, 8vw, 60px);
-    white-space: nowrap;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,0.7),
-        0 0 25px rgba(255,255,255,0.5);
+nav{
+  min-height:76px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;
 }
-
-.love-title span {
-    font-size: clamp(35px, 9vw, 65px);
-
-    animation: pulse 1.5s infinite ease-in-out;
-
-    filter:
-        drop-shadow(0 0 8px rgba(255,255,255,0.8));
+.brand{display:flex;align-items:center;gap:12px;font-weight:900}
+.logo{
+  display:grid;place-items:center;width:44px;height:44px;
+  border-radius:12px;background:linear-gradient(135deg,#bd77ff,#6021a5);
+  box-shadow:0 0 22px #8b32d544;font-size:24px;
 }
-
-/* Floating hearts */
-.heart {
-    position: absolute;
-    bottom: -60px;
-
-    color: #ff3b4f;
-    font-size: 28px;
-
-    pointer-events: none;
-
-    animation: float linear forwards;
-
-    filter:
-        drop-shadow(0 0 5px rgba(255,255,255,0.5));
+.brand small{
+  display:block;color:#b783ef;font-size:10px;
+  letter-spacing:2px;margin-top:5px;
 }
-
-/* Message animation */
-@keyframes pop {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    70% {
-        transform: scale(1.08);
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.status{color:#c4a0e8;font-size:11px}
+.hero{
+  padding:55px 0 35px;
+  background:radial-gradient(ellipse at 50% 0%,#6525a844,transparent 70%);
 }
-
-/* Heart pulse */
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.18);
-    }
+.eyebrow{font-size:11px;letter-spacing:3px;color:#c084fc}
+h1{font-size:clamp(36px,8vw,62px);line-height:1.06;margin:16px 0}
+h1 span{color:#bd83ff}
+p{line-height:1.65}
+.muted{color:var(--muted)}
+.search{
+  display:flex;align-items:center;gap:10px;margin-top:25px;
+  border:1px solid var(--line);background:#130d1c;
+  padding:6px 14px;border-radius:12px;
 }
-
-/* Floating animation */
-@keyframes float {
-    0% {
-        transform:
-            translateY(0)
-            rotate(0deg);
-
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform:
-            translateY(-115vh)
-            rotate(360deg);
-
-        opacity: 0;
-    }
+.search input{
+  width:100%;min-width:0;padding:12px 0;
+  border:0;outline:0;background:transparent;color:white;
+}
+.search input::placeholder{color:#83718f}
+.sectionhead{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin:25px 0 16px;
+}
+h2{font-size:20px;margin:0}
+#count{color:var(--muted);font-size:12px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter{
+  padding:10px 13px;border:1px solid var(--line);
+  border-radius:25px;background:#120d19;color:#c8b8d6;cursor:pointer;
+}
+.filter.active,.filter:hover{
+  color:white;background:#512078;border-color:#a855f7;
+}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{
+  min-width:0;background:linear-gradient(145deg,#171020,#0e0a14);
+  border:1px solid var(--line);border-radius:15px;padding:17px;
+  transition:.2s;
+}
+.card:hover{border-color:#9845ce;transform:translateY(-2px)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fileicon{
+  width:48px;height:48px;display:grid;place-items:center;
+  border-radius:12px;background:#291438;color:#d9b6ff;font-size:12px;
+  font-weight:bold;
+}
+.ext{
+  color:#d0a7fa;border:1px solid #503065;border-radius:7px;
+  padding:5px 7px;font-size:10px;
+}
+.card h3{font-size:16px;overflow-wrap:anywhere;margin:17px 0 8px}
+.desc{font-size:13px;color:var(--muted);min-height:40px}
+.meta{font-size:11px;color:#a997b8;margin:13px 0}
+.download{
+  display:block;text-align:center;text-decoration:none;
+  background:linear-gradient(100deg,#9143d5,#6425a5);
+  color:white;font-weight:bold;font-size:13px;
+  padding:12px;border-radius:9px;
+}
+.download:hover{filter:brightness(1.2)}
+.empty{
+  display:none;text-align:center;padding:35px;
+  color:var(--muted);border:1px dashed var(--line);border-radius:12px;
+}
+footer{
+  margin-top:50px;padding:25px 0;text-align:center;
+  border-top:1px solid var(--line);font-size:12px;
+  color:#897994;line-height:1.8;
+}
+footer strong{color:#c084fc}
+@media(max-width:720px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+  .hero{padding-top:38px}
 }
 </style>
 </head>
-
 <body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="brand">
+        <div class="logo">J</div>
+        <div>JAMINDANG FILES
+          <small>VOID TOOLS ARCHIVE</small>
+        </div>
+      </div>
+      <span class="status">● ARCHIVE</span>
+    </nav>
+  </div>
+</header>
 
-<div class="love-title">
-    <span>❤️</span>
-    <h1>Love You, Friend!</h1>
-    <span>❤️</span>
-</div>
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">WINDOWS UTILITIES / FILE CENTER</div>
+    <h1>ENTER THE<br><span>VOID.</span></h1>
+    <p class="muted">
+      Scripts, tools and utilities. Your files, organized in one place.
+    </p>
+    <label class="search">
+      <span>⌕</span>
+      <input id="search" type="search"
+        placeholder="Search tools or extensions..."
+        aria-label="Search tools">
+    </label>
+  </section>
+
+  <section>
+    <div class="sectionhead">
+      <h2>Available Tools</h2>
+      <span id="count">0 files</span>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-cat="all">All Files</button>
+      <button class="filter" data-cat="bat">.BAT</button>
+      <button class="filter" data-cat="ps1">.PS1</button>
+      <button class="filter" data-cat="vbm">.VBM</button>
+      <button class="filter" data-cat="inf">.INF</button>
+      <button class="filter" data-cat="other">Other</button>
+    </div>
+
+    <div class="grid" id="files"></div>
+    <div class="empty" id="empty">No matching tools found.</div>
+  </section>
+</main>
+
+<footer>
+  <strong>JAMINDANG FILES</strong><br>
+  VOID TOOLS ARCHIVE · Made for the community.<br>
+  Download only files you trust. Review scripts before running them.
+</footer>
 
 <script>
+// ===========================================
+// ADD YOUR FILES HERE
+// cat: bat, ps1, vbm, inf, or other
+// url: your external file-sharing URL
+// ===========================================
+const fileList = [
+  {
+    name: "Example Batch Tool",
+    cat: "bat",
+    ext: ".BAT",
+    size: "Unknown",
+    desc: "Add a description of your batch tool.",
+    url: ""
+  },
+  {
+    name: "Example PowerShell Tool",
+    cat: "ps1",
+    ext: ".PS1",
+    size: "Unknown",
+    desc: "Add a description of your PowerShell tool.",
+    url: ""
+  },
+  {
+    name: "Example VBM File",
+    cat: "vbm",
+    ext: ".VBM",
+    size: "Unknown",
+    desc: "Describe this file and its purpose.",
+    url: ""
+  },
+  {
+    name: "Example INF File",
+    cat: "inf",
+    ext: ".INF",
+    size: "Unknown",
+    desc: "Add details about this configuration file.",
+    url: ""
+  }
+];
 
-function createHeart() {
+const area = document.getElementById("files");
+const search = document.getElementById("search");
+const count = document.getElementById("count");
+const empty = document.getElementById("empty");
+let activeCat = "all";
 
-    const heart = document.createElement("div");
-
-    heart.className = "heart";
-
-    heart.innerHTML = "❤️";
-
-    heart.style.left =
-        Math.random() * 100 + "vw";
-
-    heart.style.fontSize =
-        (18 + Math.random() * 25) + "px";
-
-    heart.style.animationDuration =
-        (4 + Math.random() * 4) + "s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 8000);
+function safeText(value){
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  })[c]);
 }
 
-/* Create floating hearts */
-setInterval(createHeart, 450);
+function validURL(value){
+  try{
+    const u = new URL(value);
+    return u.protocol === "https:" || u.protocol === "http:";
+  }catch{
+    return false;
+  }
+}
 
+function render(){
+  const term = search.value.trim().toLowerCase();
+
+  const list = fileList.filter(f => {
+    const catMatch = activeCat === "all" ||
+      (activeCat === "other"
+        ? !["bat","ps1","vbm","inf"].includes(f.cat)
+        : f.cat === activeCat);
+
+    const haystack = [
+      f.name, f.ext, f.desc, f.cat
+    ].join(" ").toLowerCase();
+
+    return catMatch && haystack.includes(term);
+  });
+
+  area.innerHTML = list.map(f => {
+    const ok = validURL(f.url);
+    const href = ok ? safeText(f.url) : "#";
+
+    return `
+      <article class="card">
+        <div class="top">
+          <div class="fileicon">${safeText(f.ext)}</div>
+          <span class="ext">${safeText(f.ext)}</span>
+        </div>
+        <h3>${safeText(f.name)}</h3>
+        <p class="desc">${safeText(f.desc)}</p>
+        <div class="meta">
+          FILE SIZE: ${safeText(f.size)}
+        </div>
+        <a class="download" href="${href}"
+          ${ok ? 'target="_blank" rel="noopener noreferrer"' : ""}
+          data-ready="${ok}">
+          ↓ &nbsp; Download File
+        </a>
+      </article>`;
+  }).join("");
+
+  count.textContent = `${list.length} file${list.length === 1 ? "" : "s"}`;
+  empty.style.display = list.length ? "none" : "block";
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  const btn = e.target.closest("[data-cat]");
+  if(!btn) return;
+
+  activeCat = btn.dataset.cat;
+  document.querySelectorAll(".filter").forEach(b =>
+    b.classList.toggle("active", b === btn)
+  );
+  render();
+});
+
+search.addEventListener("input", render);
+
+area.addEventListener("click", e => {
+  const link = e.target.closest("[data-ready='false']");
+  if(!link) return;
+
+  e.preventDefault();
+  alert("This file has no valid download link yet. Add its HTTPS link in fileList.");
+});
+
+render();
 </script>
-
 </body>
 </html>
