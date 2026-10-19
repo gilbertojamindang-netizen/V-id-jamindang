@@ -248,8 +248,9 @@ function renderFiles() {
     const link = document.createElement("a");
     link.className = "download";
     link.href = file.downloadUrl;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    link.setAttribute("download", file.name);
     link.textContent = "↓  Download";
 
     card.append(top, title, description, meta, link);
