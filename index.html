@@ -1,649 +1,178 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#050505">
-<title>VØID.NET — Digital Archive</title>
-
+<title>VØID.NET — GLITCH ARCHIVE</title>
 <style>
-:root {
-  --bg: #050505;
-  --panel: #0b0b0b;
-  --white: #f5f5f5;
-  --muted: #888;
-  --line: #333;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background:
-    radial-gradient(ellipse at 50% 0%, #252525 0%, transparent 48%),
-    #050505;
-  color: var(--white);
-  font-family: Consolas, "Courier New", monospace;
-}
-
-/* Moving scanlines */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 3px,
-    rgba(255,255,255,.045) 4px
-  );
-  animation: scanlines 7s linear infinite;
-}
-
-/* Subtle monochrome noise */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  opacity: .12;
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 49px,
-      rgba(255,255,255,.08) 50px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 49px,
-      rgba(255,255,255,.06) 50px
-    );
-  background-size: 50px 50px;
-  mask-image: linear-gradient(to bottom, black, transparent 90%);
-}
-
-@keyframes scanlines {
-  from { background-position-y: 0; }
-  to { background-position-y: 100px; }
-}
-
-a, button, input, select {
-  font: inherit;
-}
-
-.container {
-  position: relative;
-  z-index: 6;
-  width: min(100% - 30px, 1000px);
-  margin: auto;
-}
-
-header {
-  text-align: center;
-  padding: 54px 0 30px;
-}
-
-.system-label {
-  color: #888;
-  font-size: 11px;
-  letter-spacing: 4px;
-  margin-bottom: 18px;
-}
-
-.logo {
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  font-size: clamp(42px, 10vw, 82px);
-  font-weight: 900;
-  letter-spacing: 5px;
-  color: #fff;
-  text-shadow: 2px 0 #777, -2px 0 #444;
-  animation: logoGlitch 4s infinite steps(1);
-}
-
-@keyframes logoGlitch {
-  0%, 88%, 100% {
-    transform: translateX(0);
-    text-shadow: 2px 0 #777, -2px 0 #444;
-    clip-path: inset(0);
-  }
-  90% {
-    transform: translateX(-3px);
-    text-shadow: 5px 0 white, -5px 0 #555;
-    clip-path: inset(20% 0 55% 0);
-  }
-  92% {
-    transform: translateX(3px);
-    clip-path: inset(60% 0 10% 0);
-  }
-  94% {
-    transform: translateX(0);
-    clip-path: inset(0);
-  }
-}
-
-.subtitle {
-  color: #aaa;
-  font-size: 12px;
-  letter-spacing: 3px;
-  margin-top: 14px;
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid #444;
-  padding: 8px 12px;
-  margin-top: 24px;
-  color: #ccc;
-  font-size: 10px;
-  letter-spacing: 2px;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  background: white;
-  box-shadow: 0 0 8px white;
-  animation: blink 1.4s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: .25; }
-}
-
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #aaa, transparent);
-  margin: 15px 0 25px;
-}
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.section-heading h2 {
-  font-size: 14px;
-  letter-spacing: 2px;
-}
-
-.count {
-  color: #aaa;
-  font-size: 11px;
-}
-
-.toolbar {
-  display: grid;
-  grid-template-columns: 1fr 170px;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-
-input, select {
-  width: 100%;
-  min-width: 0;
-  background: #090909;
-  color: white;
-  border: 1px solid #444;
-  border-radius: 0;
-  padding: 14px;
-  outline: none;
-}
-
-input:focus, select:focus {
-  border-color: white;
-  box-shadow: 0 0 10px #ffffff22;
-}
-
-input::placeholder {
-  color: #777;
-}
-
-.file-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.file-card {
-  min-width: 0;
-  position: relative;
-  overflow: hidden;
-  padding: 18px;
-  background: linear-gradient(145deg, #111, #070707);
-  border: 1px solid #303030;
-  transition: border-color .2s, transform .2s, background .2s;
-}
-
-.file-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -110%;
-  width: 70%;
-  height: 1px;
-  background: white;
-  box-shadow: 0 0 12px white;
-}
-
-.file-card:hover {
-  border-color: #ddd;
-  transform: translateY(-3px);
-  background: #111;
-}
-
-.file-card:hover::before {
-  animation: borderSweep .7s linear;
-}
-
-@keyframes borderSweep {
-  to { left: 150%; }
-}
-
-.file-number {
-  color: #777;
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-bottom: 13px;
-}
-
-.file-name {
-  color: #fff;
-  font-size: 13px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-  margin-bottom: 15px;
-}
-
-.file-type {
-  display: inline-block;
-  padding: 5px 7px;
-  border: 1px solid #444;
-  color: #aaa;
-  font-size: 10px;
-}
-
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.glitch-button {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  padding: 10px 13px;
-  background: #080808;
-  border: 1px solid #aaa;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 10px;
-  letter-spacing: 1px;
-  transition: color .15s, background .15s, box-shadow .15s;
-}
-
-.glitch-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -130%;
-  width: 75%;
-  height: 100%;
-  background: linear-gradient(
-    110deg,
-    transparent,
-    #ffffffcc,
-    transparent
-  );
-  transform: skewX(-25deg);
-}
-
-.glitch-button:hover {
-  color: #000;
-  background: #fff;
-  box-shadow: 0 0 14px #ffffff55;
-  animation: buttonGlitch .22s steps(2) infinite;
-}
-
-.glitch-button:hover::before {
-  animation: buttonShine .55s linear infinite;
-}
-
-.glitch-button:active {
-  transform: scale(.96);
-}
-
-@keyframes buttonShine {
-  to { left: 160%; }
-}
-
-@keyframes buttonGlitch {
-  0% { transform: translate(0); }
-  25% { transform: translate(2px, -1px); }
-  50% { transform: translate(-2px, 1px); }
-  75% { transform: translate(1px, 0); }
-  100% { transform: translate(0); }
-}
-
-.empty-state {
-  display: none;
-  text-align: center;
-  color: #888;
-  padding: 35px 10px;
-  border: 1px dashed #444;
-  font-size: 12px;
-}
-
-footer {
-  text-align: center;
-  padding: 35px 0 28px;
-  color: #666;
-  font-size: 10px;
-  letter-spacing: 2px;
-}
-
-footer .footer-logo {
-  color: #ccc;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 600px) {
-  header {
-    padding-top: 42px;
-  }
-
-  .toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .file-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .file-card {
-    padding: 16px;
-  }
-
-  .section-heading h2 {
-    font-size: 12px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+:root{color-scheme:dark;--bg:#050505;--white:#f5f5f5;--muted:#9a9a9a;--line:#292929}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.12;background:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(255,255,255,.24) 4px,transparent 5px);mix-blend-mode:screen}
+body:after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:9;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");animation:noise .25s steps(2) infinite}
+@keyframes noise{0%{transform:translate(0,0)}25%{transform:translate(1%,-1%)}50%{transform:translate(-1%,1%)}75%{transform:translate(1%,1%)}100%{transform:translate(-1%,-1%)}}
+.wrap{width:min(100% - 32px,1050px);margin:auto;position:relative;z-index:2}
+header{padding:28px 0 23px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:950;letter-spacing:.14em;font-size:clamp(23px,5vw,36px);position:relative;display:inline-block}
+.logo:before,.logo:after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;overflow:hidden;pointer-events:none}
+.logo:before{color:#999;clip-path:inset(0 0 55% 0);transform:translate(-2px,1px);animation:glitchA 3s infinite linear alternate-reverse}
+.logo:after{color:#fff;clip-path:inset(60% 0 0 0);transform:translate(2px,-1px);animation:glitchB 2.4s infinite linear alternate-reverse}
+@keyframes glitchA{0%,90%,100%{clip-path:inset(0 0 55% 0);transform:translate(-2px,1px)}92%{clip-path:inset(18% 0 35% 0);transform:translate(5px,-1px)}95%{clip-path:inset(40% 0 20% 0);transform:translate(-4px,1px)}}
+@keyframes glitchB{0%,88%,100%{clip-path:inset(60% 0 0 0);transform:translate(2px,-1px)}90%{clip-path:inset(72% 0 8% 0);transform:translate(-5px,1px)}94%{clip-path:inset(52% 0 25% 0);transform:translate(4px,0)}}
+.status{text-align:right;color:var(--muted);font:10px/1.7 monospace;letter-spacing:.12em}
+.status i{display:inline-block;width:7px;height:7px;background:#fff;border-radius:50%;margin-right:7px;box-shadow:0 0 10px #fff;animation:pulse 1.3s infinite}
+@keyframes pulse{50%{opacity:.2}}
+.hero{padding:48px 0 24px}
+.kicker{font:11px monospace;letter-spacing:.22em;color:var(--muted)}
+h1{font-size:clamp(38px,9vw,82px);line-height:.88;letter-spacing:-.06em;margin:17px 0;font-weight:950}
+h1 span{display:block;color:transparent;-webkit-text-stroke:1px var(--white);margin-top:9px}
+.intro{color:#aaa;max-width:650px;font-size:13px;line-height:1.8}
+.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font:10px monospace;letter-spacing:.1em;color:#aaa}
+.stats b{color:#fff}
+.toolbar{display:grid;grid-template-columns:1fr 190px;gap:10px;margin:28px 0 13px}
+input,select{width:100%;min-width:0;background:#0b0b0b;color:#fff;border:1px solid #343434;padding:14px;font:12px monospace;border-radius:0;outline:none}
+input:focus,select:focus{border-color:#fff;box-shadow:0 0 0 1px #fff}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+.filter{background:#090909;color:#aaa;border:1px solid #333;padding:9px 12px;font:10px monospace;letter-spacing:.1em;cursor:pointer;transition:.2s}
+.filter.active,.filter:hover{background:#fff;color:#000;border-color:#fff}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-bottom:35px}
+.file{border:1px solid #292929;background:linear-gradient(135deg,#111,#070707 65%);padding:17px;min-width:0;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.file:before{content:"";position:absolute;top:-20%;bottom:-20%;left:-55%;width:26%;background:#fff;opacity:.16;transform:skewX(-25deg);animation:cardStreak 5.2s infinite}
+.file:nth-child(3n):before{animation-delay:1.4s}.file:nth-child(4n):before{animation-delay:2.7s}
+@keyframes cardStreak{0%,65%{left:-55%;opacity:0}70%{opacity:.5}84%,100%{left:140%;opacity:0}}
+.file:hover{border-color:#eee;transform:translateY(-2px)}
+.file-top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#888;font:10px monospace}
+.file-index{letter-spacing:.12em}
+.tag{border:1px solid #444;padding:4px 6px;white-space:nowrap}
+.filename{font:700 14px/1.45 monospace;overflow-wrap:anywhere;margin:16px 0 8px;color:#f5f5f5}
+.original{font:10px/1.5 monospace;color:#777;overflow-wrap:anywhere;min-height:15px}
+.desc{font:10px/1.6 monospace;color:#8c8c8c;margin-top:8px;min-height:16px}
+.actions{display:flex;align-items:stretch;gap:7px;margin-top:17px}
+.download{flex:1;min-width:0;position:relative;isolation:isolate;overflow:hidden;border:1px solid #fff;background:#f5f5f5;color:#050505;padding:14px 8px;font:900 11px monospace;letter-spacing:.11em;text-align:center;cursor:pointer;transition:color .2s,background .2s,transform .2s}
+.download:before{content:"";position:absolute;z-index:-1;top:-30%;bottom:-30%;left:-45%;width:30%;background:#050505;transform:skewX(-24deg);animation:buttonStreak 2.7s infinite}
+.download:after{content:"";position:absolute;z-index:-1;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(0,0,0,.15) 6px 7px);opacity:.7}
+.download:hover{background:#050505;color:#fff;transform:translateY(-1px);animation:jitter .18s steps(2) infinite}
+.download:hover:before{background:#fff}
+.download:active{transform:scale(.97)}
+@keyframes buttonStreak{0%,55%{left:-45%;opacity:0}60%{opacity:1}83%,100%{left:140%;opacity:0}}
+@keyframes jitter{0%{translate:0 0}25%{translate:-1px 0}50%{translate:1px 1px}75%{translate:1px -1px}}
+.copy{background:#050505;color:#fff;border:1px solid #444;padding:0 11px;font:10px monospace;cursor:pointer;min-width:91px;transition:.2s}
+.copy:hover{border-color:#fff;background:#fff;color:#000}
+.notice{border:1px solid #292929;padding:15px;color:#999;font:10px/1.8 monospace;margin:0 0 34px}
+.notice strong{color:#eee}
+footer{border-top:1px solid var(--line);padding:20px 0 30px;display:flex;justify-content:space-between;gap:12px;color:#777;font:10px monospace;letter-spacing:.1em}
+.empty{display:none;color:#aaa;font:12px monospace;padding:25px 0}
+@media(max-width:650px){.wrap{width:min(100% - 24px,1050px)}header{padding:22px 0 18px}.status{font-size:8px}.hero{padding-top:36px}.toolbar{grid-template-columns:1fr}.list{grid-template-columns:1fr}.file{padding:15px}.filename{font-size:13px}footer{flex-direction:column}.copy{min-width:86px}.download{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
-
 <body>
-<div class="container">
-
-  <header>
-    <div class="system-label">DIGITAL ARCHIVE // ACCESS TERMINAL</div>
-    <h1 class="logo">VØID.NET</h1>
-    <div class="subtitle">WHITE GLITCH ARCHIVE</div>
-    <div class="status">
-      <span class="status-dot"></span>
-      <span>SYSTEM ONLINE</span>
-    </div>
-  </header>
-
-  <div class="divider"></div>
-
-  <main>
-    <div class="section-heading">
-      <h2>/// FILE DIRECTORY</h2>
-      <span class="count" id="count">14 FILES</span>
-    </div>
-
-    <div class="toolbar">
-      <input
-        id="search"
-        type="search"
-        placeholder="Search filenames..."
-        aria-label="Search filenames"
-      >
-
-      <select id="filter" aria-label="Filter file type">
-        <option value="all">ALL FILE TYPES</option>
-        <option value=".bat">BAT FILES</option>
-        <option value=".ps1">PS1 FILES</option>
-        <option value=".vbs">VBS FILES</option>
-      </select>
-    </div>
-
-    <div class="file-grid" id="fileGrid">
-
-      <article class="file-card" data-name="01_clean_vm.bat">
-        <div class="file-number">FILE // 01</div>
-        <div class="file-name">01_clean_vm.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="01_clean_vm.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="02_cloud_bypass.ps1">
-        <div class="file-number">FILE // 02</div>
-        <div class="file-name">02_cloud_bypass.ps1</div>
-        <div class="card-bottom">
-          <span class="file-type">PS1</span>
-          <button class="glitch-button" data-copy="02_cloud_bypass.ps1">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="03_spoof_hwid.ps1">
-        <div class="file-number">FILE // 03</div>
-        <div class="file-name">03_spoof_hwid.ps1</div>
-        <div class="card-bottom">
-          <span class="file-type">PS1</span>
-          <button class="glitch-button" data-copy="03_spoof_hwid.ps1">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="04_bypass_amsi.ps1">
-        <div class="file-number">FILE // 04</div>
-        <div class="file-name">04_bypass_amsi.ps1</div>
-        <div class="card-bottom">
-          <span class="file-type">PS1</span>
-          <button class="glitch-button" data-copy="04_bypass_amsi.ps1">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="05_defender_off.bat">
-        <div class="file-number">FILE // 05</div>
-        <div class="file-name">05_defender_off.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="05_defender_off.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="06_no_sleep.bat">
-        <div class="file-number">FILE // 06</div>
-        <div class="file-name">06_no_sleep.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="06_no_sleep.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="07_anti_idle.bat">
-        <div class="file-number">FILE // 07</div>
-        <div class="file-name">07_anti_idle.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="07_anti_idle.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="08_start_watchdog.vbs">
-        <div class="file-number">FILE // 08</div>
-        <div class="file-name">08_start_watchdog.vbs</div>
-        <div class="card-bottom">
-          <span class="file-type">VBS</span>
-          <button class="glitch-button" data-copy="08_start_watchdog.vbs">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="09_watchdog.bat">
-        <div class="file-number">FILE // 09</div>
-        <div class="file-name">09_watchdog.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="09_watchdog.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="10_freeze_timer.ps1">
-        <div class="file-number">FILE // 10</div>
-        <div class="file-name">10_freeze_timer.ps1</div>
-        <div class="card-bottom">
-          <span class="file-type">PS1</span>
-          <button class="glitch-button" data-copy="10_freeze_timer.ps1">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="11_hide_proc.ps1">
-        <div class="file-number">FILE // 11</div>
-        <div class="file-name">11_hide_proc.ps1</div>
-        <div class="card-bottom">
-          <span class="file-type">PS1</span>
-          <button class="glitch-button" data-copy="11_hide_proc.ps1">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="12_kick_spies.bat">
-        <div class="file-number">FILE // 12</div>
-        <div class="file-name">12_kick_spies.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="12_kick_spies.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="13_add_user.bat">
-        <div class="file-number">FILE // 13</div>
-        <div class="file-name">13_add_user.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="13_add_user.bat">COPY NAME</button>
-        </div>
-      </article>
-
-      <article class="file-card" data-name="99_panic_wipe.bat">
-        <div class="file-number">FILE // 99</div>
-        <div class="file-name">99_panic_wipe.bat</div>
-        <div class="card-bottom">
-          <span class="file-type">BAT</span>
-          <button class="glitch-button" data-copy="99_panic_wipe.bat">COPY NAME</button>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="empty-state" id="empty">
-      NO MATCHING FILES FOUND.
-    </div>
-  </main>
-
-  <footer>
-    <div class="divider"></div>
-    <div class="footer-logo">VØID.NET</div>
-    MONOCHROME // WHITE GLITCH INTERFACE
-  </footer>
-
+<div class="wrap">
+<header>
+  <div class="logo" data-text="VØID.NET">VØID.NET</div>
+  <div class="status"><i></i>GLITCH ARCHIVE<br>MONOCHROME // 001</div>
+</header>
+<section class="hero">
+  <div class="kicker">[ DIGITAL FILE DIRECTORY ]</div>
+  <h1>GLITCH<span>ARCHIVE_</span></h1>
+  <p class="intro">A monochrome archive interface. Search the files, filter by extension, copy a filename, and preview the animated download controls.</p>
+  <div class="stats"><span>FILES: <b>22</b></span><span>MODE: <b>BLACK / WHITE</b></span><span>STATUS: <b>ONLINE</b></span></div>
+</section>
+<div class="toolbar">
+  <input id="search" type="search" placeholder="SEARCH FILES..." aria-label="Search files">
+  <select id="type" aria-label="Filter by file type">
+    <option value="all">ALL FILE TYPES</option><option value="bat">.BAT</option><option value="ps1">.PS1</option><option value="vbs">.VBS</option><option value="inf">.INF</option><option value="vmx">.VMX</option>
+  </select>
 </div>
-
+<div class="filters">
+  <button class="filter active" data-filter="all">ALL FILES</button>
+  <button class="filter" data-filter="bat">BATCH</button>
+  <button class="filter" data-filter="ps1">POWERSHELL</button>
+  <button class="filter" data-filter="vbs">VBSCRIPT</button>
+  <button class="filter" data-filter="other">OTHER</button>
+</div>
+<div id="list" class="list"></div>
+<div id="empty" class="empty">NO MATCHING FILES FOUND_</div>
+<div class="notice"><strong>DOWNLOAD LINK SETUP //</strong> The file names below are preserved exactly as supplied. The download controls are visual previews until the corresponding verified download URLs are added. Review scripts before distributing or running them, especially files that change security settings, accounts, or system behavior.</div>
+<footer><span>VØID.NET // GLITCH ARCHIVE</span><span>BLACK / WHITE / NO SIGNAL</span></footer>
+</div>
 <script>
-const search = document.getElementById("search");
-const filter = document.getElementById("filter");
-const cards = [...document.querySelectorAll(".file-card")];
-const count = document.getElementById("count");
-const empty = document.getElementById("empty");
-
-function updateFiles() {
-  const query = search.value.toLowerCase().trim();
-  const type = filter.value;
-  let visible = 0;
-
-  cards.forEach(card => {
-    const name = card.dataset.name.toLowerCase();
-    const matchesSearch = name.includes(query);
-    const matchesType = type === "all" || name.endsWith(type);
-    const show = matchesSearch && matchesType;
-
-    card.style.display = show ? "" : "none";
-    if (show) visible++;
-  });
-
-  count.textContent = visible + " / " + cards.length + " FILES";
-  empty.style.display = visible ? "none" : "block";
+"use strict";
+const files = [
+ {name:"01_clean_vm.bat",original:"vmclean.bat",type:"bat"},
+ {name:"02_cloud_bypass.ps1",original:"cloudbypass.ps1",type:"ps1"},
+ {name:"03_spoof_hwid.ps1",original:"anti-detect.ps1",type:"ps1"},
+ {name:"04_uac_off.bat",original:"uac_off.bat",type:"bat"},
+ {name:"05_bypass_amsi.ps1",original:"amsi_bypass.ps1",type:"ps1"},
+ {name:"06_defender_off.bat",original:"defender_off.bat",type:"bat"},
+ {name:"07_kill_telemetry.bat",original:"kill_telemetry.bat",type:"bat"},
+ {name:"08_killac.bat",original:"killac.bat",type:"bat"},
+ {name:"09_anti_shutdown.ps1",original:"anti-shutdownpc.ps1",type:"ps1"},
+ {name:"10_no_sleep.bat",original:"nosleep.bat",type:"bat"},
+ {name:"11_anti_idle.bat",original:"anti-idle.bat",type:"bat"},
+ {name:"12_start_watchdog.vbs",original:"run_watchdog.vbs",type:"vbs"},
+ {name:"13_watchdog.bat",original:"watchdog.bat",type:"bat"},
+ {name:"14_freeze_timer.ps1",original:"freeze_cloud.ps1",type:"ps1"},
+ {name:"15_hide_proc.ps1",original:"hideproc.ps1",type:"ps1"},
+ {name:"16_noshot.ps1",original:"noshot.ps1",type:"ps1"},
+ {name:"17_stealth.bat",original:"stealth.bat",type:"bat"},
+ {name:"18_kick_spies.bat",original:"kick_intruders.bat",type:"bat"},
+ {name:"19_add_user.bat",original:"user.bat",type:"bat"},
+ {name:"99_panic_wipe.bat",original:"panic.bat",type:"bat"},
+ {name:"autorun.inf",original:"autorun.inf",type:"inf"},
+ {name:"cloudpc.vmx",original:"cloudpc.vmx",type:"vmx"}
+];
+const list=document.getElementById("list");
+const search=document.getElementById("search");
+const typeSelect=document.getElementById("type");
+const empty=document.getElementById("empty");
+let activeFilter="all";
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function render(){
+ const q=search.value.trim().toLowerCase(), t=typeSelect.value;
+ const shown=files.filter(f=>
+   (f.name.toLowerCase().includes(q)||f.original.toLowerCase().includes(q)) &&
+   (t==="all"||f.type===t) &&
+   (activeFilter==="all"||(activeFilter==="other"?!["bat","ps1","vbs"].includes(f.type):f.type===activeFilter))
+ );
+ list.innerHTML=shown.map((f,i)=>`
+ <article class="file">
+   <div class="file-top"><span class="file-index">FILE_${String(files.indexOf(f)+1).padStart(3,"0")}</span><span class="tag">.${escapeHTML(f.type.toUpperCase())}</span></div>
+   <div class="filename">${escapeHTML(f.name)}</div>
+   <div class="original">Original: ${escapeHTML(f.original)}</div>
+   <div class="desc">VØID ARCHIVE // ${escapeHTML(f.type.toUpperCase())} FILE</div>
+   <div class="actions">
+     <button class="download" type="button" data-name="${escapeHTML(f.name)}">↓ &nbsp; DOWNLOAD</button>
+     <button class="copy" type="button" data-copy="${escapeHTML(f.original)}">COPY LINK</button>
+   </div>
+ </article>`).join("");
+ empty.style.display=shown.length?"none":"block";
+ list.querySelectorAll(".download").forEach(b=>b.addEventListener("click",()=>{
+   alert("Download URL not connected yet.\n\nDisplay name: "+b.dataset.name+"\n\nAdd its verified download URL to enable downloading.");
+ }));
+ list.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",async()=>{
+   try{
+     await navigator.clipboard.writeText(b.dataset.copy);
+     b.textContent="COPIED!";
+     setTimeout(()=>b.textContent="COPY LINK",1200);
+   }catch(e){prompt("Copy original filename:",b.dataset.copy);}
+ }));
 }
-
-search.addEventListener("input", updateFiles);
-filter.addEventListener("change", updateFiles);
-
-document.querySelectorAll("[data-copy]").forEach(button => {
-  button.addEventListener("click", async () => {
-    const original = button.textContent;
-
-    try {
-      await navigator.clipboard.writeText(button.dataset.copy);
-      button.textContent = "COPIED!";
-    } catch {
-      const field = document.createElement("textarea");
-      field.value = button.dataset.copy;
-      field.style.position = "fixed";
-      field.style.opacity = "0";
-      document.body.appendChild(field);
-      field.select();
-
-      try {
-        document.execCommand("copy");
-        button.textContent = "COPIED!";
-      } catch {
-        button.textContent = "COPY FAILED";
-      }
-
-      field.remove();
-    }
-
-    setTimeout(() => {
-      button.textContent = original;
-    }, 1200);
-  });
+search.addEventListener("input",render);
+typeSelect.addEventListener("change",()=>{
+ activeFilter="all";
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));
+ render();
 });
-
-updateFiles();
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{
+ activeFilter=b.dataset.filter;
+ typeSelect.value="all";
+ document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));
+ render();
+}));
+render();
 </script>
 </body>
 </html>
