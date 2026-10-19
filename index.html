@@ -35,7 +35,6 @@ body{margin:0;background:radial-gradient(ellipse at top,#151515 0%,#050505 38%,#
 .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:9px 12px;font:inherit;font-weight:700;border:1px solid #444;color:#fff;background:#161616;cursor:pointer}
 .btn.primary{background:#e8e8e8;border-color:#fff;color:#050505;flex:1;box-shadow:0 0 9px #fff2}
 .btn.primary:hover{background:#fff;box-shadow:0 0 14px #fff4}
-.btn.disabled{opacity:.55;cursor:not-allowed}
 .empty{padding:35px 12px;text-align:center;color:#aaa;border:1px dashed #333;border-radius:14px}
 .footer{text-align:center;color:#888;font-size:.8rem;margin-top:30px}
 @media(min-width:720px){.toolbar{grid-template-columns:1fr auto;align-items:center}.filters{justify-content:flex-end}}
@@ -49,7 +48,6 @@ body{margin:0;background:radial-gradient(ellipse at top,#151515 0%,#050505 38%,#
     <p>A searchable catalog of files shared by Jamindang. Search by filename or filter by file type.</p>
     <div class="stats"><span class="pill">22 file entries</span><span class="pill">Dark / Purple UI</span><span class="pill">Mobile friendly</span></div>
   </header>
-
   <section class="toolbar" aria-label="Search and filters">
     <input id="search" class="search" type="search" placeholder="🔎 Search files..." aria-label="Search files">
     <div class="filters" id="filters">
@@ -61,37 +59,35 @@ body{margin:0;background:radial-gradient(ellipse at top,#151515 0%,#050505 38%,#
       <button class="filter" data-filter=".vmx">.VMX</button>
     </div>
   </section>
-
-  <div class="note"><strong>Safety note:</strong> These are user-submitted file links; the contents have not been verified. Be cautious with scripts and configuration files, and don't run files unless you trust and understand what they do. Some entries are listed for reference only.</div>
-
+  <div class="note"><strong>Safety note:</strong> These are user-submitted file links; the contents have not been verified. Be cautious with scripts and configuration files, and don't run files unless you trust and understand what they do.</div>
   <section id="fileGrid" class="grid" aria-live="polite"></section>
   <div id="empty" class="empty" hidden>No matching files. Try another search or filter.</div>
   <footer class="footer">VOID ARCHIVE · Use files responsibly</footer>
 </main>
 <script>
 const files = [
-  {name:"amsi_bypass.ps1",cat:".ps1",url:"https://www.mediafire.com/file/975i4bue6y9qhhg/amsi_bypass.ps1/file",safe:false},
-  {name:"anti-detect.ps1",cat:".ps1",url:"https://www.mediafire.com/file/yzaqjj9pc8q0d1e/anti-detect.ps1/file",safe:false},
-  {name:"anti-idle.bat",cat:".bat",url:"https://www.mediafire.com/file/kef6d0z4e0lf2px/anti-idle.bat/file",safe:true},
-  {name:"anti-shotdownpc.ps1",cat:".ps1",url:"https://www.mediafire.com/file/layjou0o52rpx1r/anti-shotdownpc.ps1/file",safe:true},
-  {name:"autorun.inf",cat:".inf",url:"https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file",safe:true},
-  {name:"cloudbypass.ps1",cat:".ps1",url:"https://www.mediafire.com/file/iottqvyvzykfscb/cloudbypass.ps1/file",safe:false},
-  {name:"cloudpc.vmx",cat:".vmx",url:"https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file",safe:true},
-  {name:"defender_off.bat",cat:".bat",url:"https://www.mediafire.com/file/ye3qu4fun76ylxx/defender_off.bat/file",safe:false},
-  {name:"kick_intruders.bat",cat:".bat",url:"https://www.mediafire.com/file/exb2kl9y7lby9m1/kick_intruders.bat/file",safe:false},
-  {name:"hideproc.ps1",cat:".ps1",url:"https://www.mediafire.com/file/6zxyxfhn71o5iqq/hideproc.ps1/file",safe:false},
-  {name:"killac.bat",cat:".bat",url:"https://www.mediafire.com/file/r2jbfbpng19dkpq/killac.bat/file",safe:false},
-  {name:"kill_telemetry.bat",cat:".bat",url:"https://www.mediafire.com/file/za5gvr8v1rfpnn0/kill_telemetry.bat/file",safe:true},
-  {name:"noshot.ps1",cat:".ps1",url:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/noshot.ps1/file",safe:true},
-  {name:"nosleep.bat",cat:".bat",url:"https://www.mediafire.com/file/40q39ayjbgtcdxp/nosleep.bat/file",safe:true},
-  {name:"panic.bat",cat:".bat",url:"https://www.mediafire.com/file/s7s18i1qx7jpe3c/panic.bat/file",safe:false},
-  {name:"run_watchdog.vbs",cat:".vbs",url:"https://www.mediafire.com/file/y32u4o22tis0s7q/run_watchdog.vbs/file",safe:false},
-  {name:"stealth.bat",cat:".bat",url:"https://www.mediafire.com/file/jn50ueqkptb89rm/stealth.bat/file",safe:false},
-  {name:"uac_off.bat",cat:".bat",url:"https://www.mediafire.com/file/9gvuf6ezusg7ngq/uac_off.bat/file",safe:false},
-  {name:"user.bat",cat:".bat",url:"https://www.mediafire.com/file/vlgsadujbez7060/user.bat/file",safe:true},
-  {name:"vmclean.bat",cat:".bat",url:"https://www.mediafire.com/file/8d8oa8zy53brb1x/vmclean.bat/file",safe:true},
-  {name:"watchdog.bat",cat:".bat",url:"https://www.mediafire.com/file/9b85fy6whvcmwif/watchdog.bat/file",safe:false},
-  {name:"freeze_cloud.ps1",cat:".ps1",url:"https://www.mediafire.com/file/99fn26tlhqmflxg/freeze_cloud.ps1/file",safe:false}
+  {name:"amsi_bypass.ps1",cat:".ps1",url:"https://www.mediafire.com/file/975i4bue6y9qhhg/amsi_bypass.ps1/file"},
+  {name:"anti-detect.ps1",cat:".ps1",url:"https://www.mediafire.com/file/yzaqjj9pc8q0d1e/anti-detect.ps1/file"},
+  {name:"anti-idle.bat",cat:".bat",url:"https://www.mediafire.com/file/kef6d0z4e0lf2px/anti-idle.bat/file"},
+  {name:"anti-shotdownpc.ps1",cat:".ps1",url:"https://www.mediafire.com/file/layjou0o52rpx1r/anti-shotdownpc.ps1/file"},
+  {name:"autorun.inf",cat:".inf",url:"https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file"},
+  {name:"cloudbypass.ps1",cat:".ps1",url:"https://www.mediafire.com/file/iottqvyvzykfscb/cloudbypass.ps1/file"},
+  {name:"cloudpc.vmx",cat:".vmx",url:"https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file"},
+  {name:"defender_off.bat",cat:".bat",url:"https://www.mediafire.com/file/ye3qu4fun76ylxx/defender_off.bat/file"},
+  {name:"kick_intruders.bat",cat:".bat",url:"https://www.mediafire.com/file/exb2kl9y7lby9m1/kick_intruders.bat/file"},
+  {name:"hideproc.ps1",cat:".ps1",url:"https://www.mediafire.com/file/6zxyxfhn71o5iqq/hideproc.ps1/file"},
+  {name:"killac.bat",cat:".bat",url:"https://www.mediafire.com/file/r2jbfbpng19dkpq/killac.bat/file"},
+  {name:"kill_telemetry.bat",cat:".bat",url:"https://www.mediafire.com/file/za5gvr8v1rfpnn0/kill_telemetry.bat/file"},
+  {name:"noshot.ps1",cat:".ps1",url:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/noshot.ps1/file"},
+  {name:"nosleep.bat",cat:".bat",url:"https://www.mediafire.com/file/40q39ayjbgtcdxp/nosleep.bat/file"},
+  {name:"panic.bat",cat:".bat",url:"https://www.mediafire.com/file/s7s18i1qx7jpe3c/panic.bat/file"},
+  {name:"run_watchdog.vbs",cat:".vbs",url:"https://www.mediafire.com/file/y32u4o22tis0s7q/run_watchdog.vbs/file"},
+  {name:"stealth.bat",cat:".bat",url:"https://www.mediafire.com/file/jn50ueqkptb89rm/stealth.bat/file"},
+  {name:"uac_off.bat",cat:".bat",url:"https://www.mediafire.com/file/9gvuf6ezusg7ngq/uac_off.bat/file"},
+  {name:"user.bat",cat:".bat",url:"https://www.mediafire.com/file/vlgsadujbez7060/user.bat/file"},
+  {name:"vmclean.bat",cat:".bat",url:"https://www.mediafire.com/file/8d8oa8zy53brb1x/vmclean.bat/file"},
+  {name:"watchdog.bat",cat:".bat",url:"https://www.mediafire.com/file/9b85fy6whvcmwif/watchdog.bat/file"},
+  {name:"freeze_cloud.ps1",cat:".ps1",url:"https://www.mediafire.com/file/99fn26tlhqmflxg/freeze_cloud.ps1/file"}
 ];
 const descriptions = {
   ".bat":"Windows batch file",
@@ -104,37 +100,71 @@ const search = document.getElementById("search");
 const grid = document.getElementById("fileGrid");
 const empty = document.getElementById("empty");
 let currentFilter = "all";
-function render(){
+
+function render() {
   const q = search.value.trim().toLowerCase();
-  const visible = files.filter(f => (currentFilter === "all" || f.cat === currentFilter) && f.name.toLowerCase().includes(q));
+  const visible = files.filter(f =>
+    (currentFilter === "all" || f.cat === currentFilter) &&
+    f.name.toLowerCase().includes(q)
+  );
   grid.innerHTML = "";
   visible.forEach(f => {
     const card = document.createElement("article");
     card.className = "card";
-    const top = document.createElement("div"); top.className = "cardtop";
-    const icon = document.createElement("div"); icon.className = "fileicon"; icon.textContent = f.cat.replace(".","");
+    const top = document.createElement("div");
+    top.className = "cardtop";
+    const icon = document.createElement("div");
+    icon.className = "fileicon";
+    icon.textContent = f.cat.replace(".", "");
     const info = document.createElement("div");
-    const name = document.createElement("div"); name.className = "name"; name.textContent = f.name;
-    const meta = document.createElement("div"); meta.className = "meta"; meta.textContent = f.cat.toUpperCase() + " · " + descriptions[f.cat];
-    info.append(name,meta); top.append(icon,info);
-    const desc = document.createElement("p"); desc.className = "desc";
-    desc.textContent = f.safe ? "User-submitted link. Review the file before use." : "Reference entry only — not enabled as a download in this catalog until its purpose is reviewed.";
-    const actions = document.createElement("div"); actions.className = "actions";
-    const link = document.createElement("a"); link.className = "btn " + (f.safe ? "primary" : "disabled");
-    if(f.safe){ link.href=f.url; link.target="_blank"; link.rel="noopener noreferrer"; link.textContent="Open file page"; }
-    else { link.href="#"; link.setAttribute("aria-disabled","true"); link.textContent="Not enabled"; link.addEventListener("click",e=>e.preventDefault()); }
-    const copy = document.createElement("button"); copy.className="btn"; copy.textContent="Copy link";
-    copy.addEventListener("click", async () => { try { await navigator.clipboard.writeText(f.url); copy.textContent="Copied!"; setTimeout(()=>copy.textContent="Copy link",1200); } catch { window.prompt("Copy this link:",f.url); } });
-    actions.append(link,copy); card.append(top,desc,actions); grid.append(card);
+    const name = document.createElement("div");
+    name.className = "name";
+    name.textContent = f.name;
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = f.cat.toUpperCase() + " · " + descriptions[f.cat];
+    info.append(name, meta);
+    top.append(icon, info);
+    const desc = document.createElement("p");
+    desc.className = "desc";
+    desc.textContent = "MediaFire link. Review the file before running it.";
+    const actions = document.createElement("div");
+    actions.className = "actions";
+    const link = document.createElement("a");
+    link.className = "btn primary";
+    link.href = f.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open MediaFire";
+    const copy = document.createElement("button");
+    copy.className = "btn";
+    copy.textContent = "Copy link";
+    copy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(f.url);
+        copy.textContent = "Copied!";
+        setTimeout(() => copy.textContent = "Copy link", 1200);
+      } catch {
+        window.prompt("Copy this link:", f.url);
+      }
+    });
+    actions.append(link, copy);
+    card.append(top, desc, actions);
+    grid.append(card);
   });
   empty.hidden = visible.length !== 0;
 }
-search.addEventListener("input",render);
-document.querySelectorAll(".filter").forEach(btn=>btn.addEventListener("click",()=>{
-  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active"); currentFilter=btn.dataset.filter; render();
-}));
+search.addEventListener("input", render);
+document.querySelectorAll(".filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = btn.dataset.filter;
+    render();
+  });
+});
 render();
 </script>
 </body>
-</html>
+  </html>
+  
