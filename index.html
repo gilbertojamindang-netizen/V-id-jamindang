@@ -14,7 +14,7 @@
         }
 
         body {
-            background: #050505; /* Solid dark base */
+            background: #050505;
             color: #e0e0e0;
             font-family: 'Share Tech Mono', monospace, Courier, sans-serif;
             padding: 20px;
@@ -24,7 +24,6 @@
             min-height: 100vh;
         }
 
-        /* TOP SECTION */
         .header {
             text-align: center;
             margin-bottom: 20px;
@@ -108,7 +107,6 @@
             text-transform: uppercase;
         }
 
-        /* SEARCH & FILTERS */
         .search-container {
             width: 100%;
             max-width: 600px;
@@ -149,9 +147,9 @@
             overflow-x: auto;
             padding-bottom: 10px;
             margin-bottom: 10px;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
-        .filter-row::-webkit-scrollbar { display: none; } /* Chrome */
+        .filter-row::-webkit-scrollbar { display: none; }
 
         .filter-btn {
             background: #0a0a0a;
@@ -172,7 +170,6 @@
             border-color: #fff;
         }
 
-        /* SAFETY NOTICE */
         .safety {
             width: 100%;
             max-width: 600px;
@@ -186,7 +183,6 @@
             line-height: 1.5;
         }
 
-        /* CARD GRID */
         .grid-container {
             width: 100%;
             max-width: 600px;
@@ -249,7 +245,6 @@
             text-transform: uppercase;
         }
 
-        /* ANIMATED DOWNLOAD BUTTON */
         .download-btn {
             background: #fff;
             color: #000;
@@ -292,26 +287,26 @@
         <p class="subtitle">A dark digital archive. Search files by name or filter by file type.</p>
         
         <div class="top-pills">
-            <span class="pill" id="totalFilesPill">23 FILES</span>
+            <span class="pill" id="totalFilesPill">FILES</span>
             <span class="pill">BLACK / WHITE</span>
             <span class="pill">MOBILE FRIENDLY</span>
         </div>
     </div>
 
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search files..." onkeyup="filterFiles()">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search files...">
     </div>
 
-    <div class="file-count" id="fileCountDisplay">23 files</div>
+    <div class="file-count" id="fileCountDisplay">Loading...</div>
 
     <div class="filter-row">
-        <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
-        <button class="filter-btn" onclick="setFilter('bat', this)">BAT</button>
-        <button class="filter-btn" onclick="setFilter('ps1', this)">PS1</button>
-        <button class="filter-btn" onclick="setFilter('inf', this)">INF</button>
-        <button class="filter-btn" onclick="setFilter('vbs', this)">VBS</button>
-        <button class="filter-btn" onclick="setFilter('vmx', this)">VMX</button>
-        <button class="filter-btn" onclick="setFilter('exe', this)">EXE</button>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="bat">BAT</button>
+        <button class="filter-btn" data-filter="ps1">PS1</button>
+        <button class="filter-btn" data-filter="inf">INF</button>
+        <button class="filter-btn" data-filter="vbs">VBS</button>
+        <button class="filter-btn" data-filter="vmx">VMX</button>
+        <button class="filter-btn" data-filter="exe">EXE</button>
     </div>
 
     <div class="safety">
@@ -557,4 +552,11 @@
                     <div class="file-type">.BAT FILE</div>
                 </div>
             </div>
-            <a href="htt
+            <a href="https://www.mediafire.com/file/s7s18i1qx7jpe3c/99_panic_wipe.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 21 -->
+        <div class="card file-card" data-type="vmx">
+            <div class="card-top">
+                <div class="badge-box">VMX</div>
+                <div class="fil
