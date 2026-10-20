@@ -1,74 +1,378 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050505">
-<title>VØID.NET — VOID ARCHIVE</title>
-<style>
-:root{color-scheme:dark;--bg:#050505;--white:#f5f5f5;--muted:#999;--line:#292929}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.1;background:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(255,255,255,.22) 4px,transparent 5px)}
-body:after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:9;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");animation:noise .25s steps(2) infinite}
-@keyframes noise{0%{transform:translate(0,0)}25%{transform:translate(1%,-1%)}50%{transform:translate(-1%,1%)}75%{transform:translate(1%,1%)}100%{transform:translate(-1%,-1%)}}
-.wrap{width:min(1050px,calc(100% - 28px));margin:auto;position:relative;z-index:2}
-header{padding:26px 0 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}
-.logo{font-weight:950;letter-spacing:.13em;font-size:clamp(24px,5vw,37px);position:relative;display:inline-block}
-.logo:before,.logo:after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;pointer-events:none;overflow:hidden}
-.logo:before{color:#aaa;clip-path:inset(0 0 55% 0);animation:glitchA 2.7s infinite linear alternate-reverse}
-.logo:after{color:#fff;clip-path:inset(60% 0 0 0);animation:glitchB 2.1s infinite linear alternate-reverse}
-@keyframes glitchA{0%,88%,100%{transform:translate(-2px,1px);clip-path:inset(0 0 55% 0)}90%{transform:translate(5px,-1px);clip-path:inset(18% 0 35% 0)}95%{transform:translate(-4px,1px);clip-path:inset(40% 0 20% 0)}}
-@keyframes glitchB{0%,88%,100%{transform:translate(2px,-1px);clip-path:inset(60% 0 0 0)}91%{transform:translate(-5px,1px);clip-path:inset(72% 0 8% 0)}95%{transform:translate(4px,0);clip-path:inset(52% 0 25% 0)}}
-.status{text-align:right;color:var(--muted);font:10px/1.7 monospace;letter-spacing:.12em}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:white;margin-right:7px;box-shadow:0 0 10px white;animation:pulse 1.3s infinite}@keyframes pulse{50%{opacity:.2}}
-.hero{padding:42px 0 24px}.kicker{font:11px monospace;letter-spacing:.22em;color:var(--muted)}h1{font-size:clamp(42px,9vw,82px);line-height:.88;letter-spacing:-.06em;margin:17px 0;font-weight:950}h1 span{display:block;color:transparent;-webkit-text-stroke:1px white;margin-top:9px}.intro{color:#aaa;max-width:680px;font-size:13px;line-height:1.8}.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font:10px monospace;letter-spacing:.1em;color:#aaa}.stats b{color:white}
-.toolbar{display:grid;grid-template-columns:1fr 190px;gap:10px;margin:25px 0 13px}input,select{width:100%;min-width:0;background:#0b0b0b;color:white;border:1px solid #343434;padding:14px;font:12px monospace;outline:none}input:focus,select:focus{border-color:white}
-.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}.filter{background:#090909;color:#aaa;border:1px solid #333;padding:9px 12px;font:10px monospace;letter-spacing:.1em;cursor:pointer}.filter.active,.filter:hover{background:white;color:black;border-color:white}
-.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-bottom:30px}.file{border:1px solid #292929;background:linear-gradient(135deg,#111,#070707 65%);padding:16px;min-width:0;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}.file:before{content:"";position:absolute;top:-20%;bottom:-20%;left:-55%;width:26%;background:white;opacity:0;transform:skewX(-25deg);pointer-events:none}.file:hover:before{animation:cardStreak .8s ease-out}.file:nth-child(3n):before{animation-delay:.1s}@keyframes cardStreak{0%{left:-55%;opacity:0}35%{opacity:.25}100%{left:140%;opacity:0}}.file:hover{border-color:#eee;transform:translateY(-2px)}
-.file-top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#888;font:10px monospace}.tag{border:1px solid #444;padding:4px 6px;white-space:nowrap;font:9px monospace}.tag.ready{border-color:#777;color:#fff}.tag.review{border-color:#66563c;color:#c9b184}
-.filename{font:700 14px/1.45 monospace;overflow-wrap:anywhere;margin:15px 0 7px}.desc{font:10px/1.6 monospace;color:#8c8c8c;margin-top:8px;min-height:30px}.actions{display:flex;gap:7px;margin-top:15px}
-.download{display:block;flex:1;min-width:0;position:relative;isolation:isolate;overflow:hidden;border:1px solid white;background:#f5f5f5;color:#050505;padding:13px 7px;font:900 11px monospace;letter-spacing:.1em;text-align:center;text-decoration:none;cursor:pointer;transition:color .2s,background .2s,transform .2s}.download:before{content:"";position:absolute;z-index:-1;top:-30%;bottom:-30%;left:-45%;width:30%;background:#111;transform:skewX(-24deg);animation:buttonStreak 2.6s infinite}.download:after{content:"";position:absolute;z-index:-1;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(0,0,0,.14) 6px 7px)}@keyframes buttonStreak{0%,48%{left:-45%;opacity:0}53%{opacity:1}82%,100%{left:140%;opacity:0}}.download:hover{background:#050505;color:white;transform:translateY(-1px);animation:jitter .18s steps(2) infinite}.download:hover:before{background:white}@keyframes jitter{0%{translate:0 0}25%{translate:-1px 0}50%{translate:1px 1px}75%{translate:1px -1px}}.download:active{transform:scale(.97)}
-.copy{background:#050505;color:white;border:1px solid #444;padding:0 10px;font:10px monospace;cursor:pointer;min-width:86px}.copy:hover{border-color:white;background:white;color:black}
-.notice{border:1px solid #292929;padding:14px;color:#999;font:10px/1.8 monospace;margin:0 0 30px}.notice strong{color:#eee}footer{border-top:1px solid var(--line);padding:20px 0 30px;display:flex;justify-content:space-between;gap:12px;color:#777;font:10px monospace;letter-spacing:.1em}.empty{display:none;color:#aaa;font:12px monospace;padding:25px 0}
-@media(max-width:650px){.wrap{width:calc(100% - 24px)}header{padding:21px 0 18px}.status{font-size:8px}.hero{padding-top:34px}.toolbar{grid-template-columns:1fr}.list{grid-template-columns:1fr}.file{padding:15px}footer{flex-direction:column}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID.NET - Bypass Archive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            font-family: 'Share Tech Mono', monospace, Courier, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #666;
+        }
+
+        .grid-container {
+            width: 100%;
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #555;
+            background: #111;
+            transform: translateY(-2px);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badge {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #aaa;
+        }
+
+        .file-name {
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        .download-btn {
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            font-family: inherit;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            background: #ccc;
+        }
+
+        .safety {
+            width: 100%;
+            max-width: 800px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.5;
+        }
+    </style>
 </head>
-<body><div class="wrap">
-<header><div class="logo" data-text="VØID.NET">VØID.NET</div><div class="status"><i></i>VOID ARCHIVE<br>MONOCHROME // 001</div></header>
-<section class="hero"><div class="kicker">[ DIGITAL FILE DIRECTORY ]</div><h1>VOID<span>ARCHIVE_</span></h1><p class="intro">A monochrome archive interface. Search the directory, filter by extension, copy filenames, and open available download pages.</p><div class="stats"><span>FILES: <b>22</b></span><span>MODE: <b>BLACK / WHITE</b></span><span>STATUS: <b>ONLINE</b></span></div></section>
-<div class="toolbar"><input id="search" type="search" placeholder="SEARCH FILES..." aria-label="Search files"><select id="type" aria-label="Filter by file type"><option value="all">ALL FILE TYPES</option><option value="bat">.BAT</option><option value="ps1">.PS1</option><option value="vbs">.VBS</option><option value="inf">.INF</option><option value="vmx">.VMX</option></select></div>
-<div class="filters"><button class="filter active" data-filter="all">ALL FILES</button><button class="filter" data-filter="bat">BATCH</button><button class="filter" data-filter="ps1">POWERSHELL</button><button class="filter" data-filter="vbs">VBSCRIPT</button><button class="filter" data-filter="other">OTHER</button></div>
-<div id="list" class="list"></div><div id="empty" class="empty">NO MATCHING FILES FOUND_</div>
-<div class="notice"><strong>ARCHIVE NOTE //</strong> The directory includes all 22 entries from the project list. Supplied MediaFire links are attached to entries where appropriate. Some system-modifying scripts remain catalog-only until reviewed.</div>
-<footer><span>VØID.NET // VOID ARCHIVE</span><span>BLACK / WHITE / NO SIGNAL</span></footer>
-</div>
-<script>
-"use strict";
-const files=[
-{name:"01_clean_vm.bat",type:"bat",url:"https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file",ok:true,desc:"Batch script — inspect contents before running."},
-{name:"02_cloud_bypass.ps1",type:"ps1",url:"https://www.mediafire.com/file/iottqvyvzykfscb/02_cloud_bypass.ps1/file",ok:false,desc:"Bypass-related PowerShell script — review required."},
-{name:"03_uac_off.bat",type:"bat",url:"https://www.mediafire.com/file/9gvuf6ezusg7ngq/03_uac_off.bat/file",ok:false,desc:"May disable Windows security prompts — review required."},
-{name:"04_spoof_hwid.ps1",type:"ps1",url:"https://www.mediafire.com/file/yzaqjj9pc8q0d1e/04_spoof_hwid.ps1/file",ok:false,desc:"System identity modification — review required."},
-{name:"05_bypass_amsi.ps1",type:"ps1",url:"https://www.mediafire.com/file/975i4bue6y9qhhg/05_bypass_amsi.ps1/file",ok:false,desc:"Security-control bypass — review required."},
-{name:"06_defender_off.bat",type:"bat",url:"https://www.mediafire.com/file/ye3qu4fun76ylxx/06_defender_off.bat/file",ok:false,desc:"May disable antivirus protection — review required."},
-{name:"07_kill_telemetry.bat",type:"bat",url:"https://www.mediafire.com/file/za5gvr8v1rfpnn0/07_kill_telemetry.bat/file",ok:false,desc:"May change system services/settings — review required."},
-{name:"08_killac.bat",type:"bat",url:"https://www.mediafire.com/file/r2jbfbpng19dkpq/08_killac.bat/file",ok:false,desc:"System process/service script — review required."},
-{name:"09_anti_shutdown.ps1",type:"ps1",url:"https://www.mediafire.com/file/layjou0o52rpx1r/09_anti_shutdown.ps1/file",ok:true,desc:"PowerShell script — review contents before running."},
-{name:"10_no_sleep.bat",type:"bat",url:"https://www.mediafire.com/file/40q39ayjbgtcdxp/10_no_sleep.bat/file",ok:true,desc:"Power-management script — inspect before running."},
-{name:"11_anti_idle.bat",type:"bat",url:"https://www.mediafire.com/file/kef6d0z4e0lf2px/11_anti_idle.bat/file",ok:true,desc:"Idle behavior script — inspect before running."},
-{name:"12_start_watchdog.vbs",type:"vbs",url:"https://www.mediafire.com/file/y32u4o22tis0s7q/12_start_watchdog.vbs/file",ok:true,desc:"VBS launcher — review contents before running."},
-{name:"12_watchdog.bat",type:"bat",url:"https://www.mediafire.com/file/9b85fy6whvcmwif/12_watchdog.bat/file",ok:true,desc:"Watchdog batch script — inspect first."},
-{name:"13_freeze_timer.ps1",type:"ps1",url:"https://www.mediafire.com/file/99fn26tlhqmflxg/13_freeze_timer.ps1/file",ok:true,desc:"Timer-related PowerShell script — inspect first."},
-{name:"14_hide_proc.ps1",type:"ps1",url:"https://www.mediafire.com/file/6zxyxfhn71o5iqq/14_hide_proc.ps1/file",ok:false,desc:"Process-hiding behavior — review required."},
-{name:"15_noshot.ps1",type:"ps1",url:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/15_noshot.ps1/file",ok:true,desc:"Capture-related PowerShell script — inspect first."},
-{name:"16_stealth.bat",type:"bat",url:"https://www.mediafire.com/file/jn50ueqkptb89rm/16_stealth.bat/file",ok:false,desc:"Stealth-related script — review required."},
-{name:"17_kick_spies.bat",type:"bat",url:"https://www.mediafire.com/file/exb2kl9y7lby9m1/17_kick_spies.bat/file",ok:false,desc:"May alter processes/settings — review required."},
-{name:"18_add_user.bat",type:"bat",url:"https://www.mediafire.com/file/vlgsadujbez7060/18_add_user.bat/file",ok:false,desc:"May create a Windows account — review required."},
-{name:"99_panic_wipe.bat",type:"bat",url:"",ok:false,desc:"No URL was provided for this entry."},
-{name:"cloudpc.vmx",type:"vmx",url:"https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file",ok:true,desc:"Virtual machine configuration file."},
-{name:"autorun.inf",type:"inf",url:"https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file",ok:false,desc:"Autorun configuration — inspect its referenced command."},
-{name:"README.txt",type:"other",url:"",ok:false,desc:"Extra index entry to complete the 22-card school-project layout. No URL was supplied."}
-];
-const list=document.getElementById("list"),search=document.getElementById("search"),typeSelect=document.getElementById("type"),empty=document.getElementById("empty");let active="all";
-function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function render(){const q=search.value.trim().toLowerCase(),t=typeSelect.value;const shown=files.filter(f=>f.name.toLowerCase().includes(q)&&(t==="all"||f.type===t)&&(active==="all"||(active==="other"?!["bat","ps1","vbs"].includes(f.type):f.type===active)));list.innerHTML=shown.map(f=>`<article class="file"><div class="file-top"><span>FILE_${String(files.indexOf(f)+1).padStart(3,"0")}</span><span class="tag ${f.ok?"ready":"review"}">${f.ok?"LINK AVAILABLE":"CATALOG ENTRY"}</span></div><div class="filename">${esc(f.name)}</div><div class="desc">${esc(f.desc)}</div><div class="actions">${f.ok&&f.url?`<a class="download" href="${f.url}" target="_blank" rel="noopener noreferrer">↓ &nbsp; DOWNLOAD</a>`:`<button class="download" type="button" data-review="${esc(f.name)}">${f.url?"DOWNLOAD — REVIEW FIRST":"URL NOT PROVIDED"}</button>`}<button class="copy" type="button" data-copy="${esc(f.name)}">COPY NAME</button></div></article>`).join("");empty.style.display=shown.length?"none":"block";list.querySelectorAll("[data-review]").forEach(b=>b.addEventListener("click",()=>alert("This entry is cataloged, but its direct link is not enabled until the file is reviewed.")));list.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="COPIED";setTimeout(()=>b.textContent="COPY NAME",1000)}catch(e){prompt("Copy filename:",b.dataset.copy)}}));}
-search.addEventListener("input",render);typeSelect.addEventListener("change",()=>{active="all";document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));render()});document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{active=b.dataset.filter;typeSelect.value="all";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()}));render();
-</script></body></html>
+<body>
+
+    <div class="header">
+        <h1>VOID.NET</h1>
+        <p>A dark digital archive. Click to download.</p>
+    </div>
+
+    <input type="text" id="searchInput" class="search-box" placeholder="Search files..." onkeyup="filterFiles()">
+
+    <div class="safety">
+        <strong>Safety notice:</strong> File contents have not been verified. Be careful with scripts and configuration files. Only run files you trust and understand.
+    </div>
+
+    <div class="grid-container" id="fileGrid">
+        
+        <!-- CARD 1 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">01_clean_vm.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">02_cloud_bypass.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/iottqvyvzykfscb/02_cloud_bypass.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">03_uac_off.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/9gvuf6ezusg7ngq/03_uac_off.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">04_spoof_hwid.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/yzaqjj9pc8q0d1e/04_spoof_hwid.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">05_bypass_amsi.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/975i4bue6y9qhhg/05_bypass_amsi.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">06_defender_off.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/ye3qu4fun76ylxx/06_defender_off.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">07_kill_telemetry.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/za5gvr8v1rfpnn0/07_kill_telemetry.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">08_killac.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/r2jbfbpng19dkpq/08_killac.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 9 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">09_anti_shutdown.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/layjou0o52rpx1r/09_anti_shutdown.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 10 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">10_no_sleep.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/40q39ayjbgtcdxp/10_no_sleep.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 11 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">11_anti_idle.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/kef6d0z4e0lf2px/11_anti_idle.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 12 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">VBS</div>
+                <div class="file-name">12_start_watchdog.vbs</div>
+            </div>
+            <a href="https://www.mediafire.com/file/y32u4o22tis0s7q/12_start_watchdog.vbs/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 13 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">12_watchdog.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/9b85fy6whvcmwif/12_watchdog.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 14 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">13_freeze_timer.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/99fn26tlhqmflxg/13_freeze_timer.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 15 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">14_hide_proc.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/6zxyxfhn71o5iqq/14_hide_proc.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 16 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">PS1</div>
+                <div class="file-name">15_noshot.ps1</div>
+            </div>
+            <a href="https://www.mediafire.com/file/xk2sl1qdi9ujayh/15_noshot.ps1/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 17 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">16_stealth.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/jn50ueqkptb89rm/16_stealth.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 18 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">17_kick_spies.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/exb2kl9y7lby9m1/17_kick_spies.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 19 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">18_add_user.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/vlgsadujbez7060/18_add_user.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 20 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">BAT</div>
+                <div class="file-name">99_panic_wipe.bat</div>
+            </div>
+            <a href="https://www.mediafire.com/file/s7s18i1qx7jpe3c/99_panic_wipe.bat/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 21 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">VMX</div>
+                <div class="file-name">cloudpc.vmx</div>
+            </div>
+            <a href="https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+        <!-- CARD 22 -->
+        <div class="card file-card">
+            <div class="file-info">
+                <div class="badge">INF</div>
+                <div class="file-name">autorun.inf</div>
+            </div>
+            <a href="https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file" target="_blank" class="download-btn">Download</a>
+        </div>
+
+    </div>
+
+    <!-- SEARCH SCRIPT -->
+    <script>
+        function filterFiles() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('file-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let fileName = cards[i].getElementsByClassName('file-name')[0].innerText.toLowerCase();
+                if (fileName.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+         </html>
