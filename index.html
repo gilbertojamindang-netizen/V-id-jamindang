@@ -3,45 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick trip bypass</title>
+    <title>VØID.NET</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #050505; color: #e0e0e0; font-family: 'Share Tech Mono', monospace; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        body { 
+            background: #050505; 
+            color: #e0e0e0; 
+            font-family: 'Share Tech Mono', monospace; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
         .header { text-align: center; margin-bottom: 20px; width: 100%; max-width: 600px; }
-        .glitch { font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 2px; color: #fff; position: relative; margin-bottom: 15px; font-weight: bold; text-transform: uppercase; }
-        .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; }
-        .glitch::before { left: 2px; text-shadow: -2px 0 #ff00c1; animation: glitch-anim-1 2s infinite linear alternate-reverse; }
-        .glitch::after { left: -2px; text-shadow: -2px 0 #00fff9; animation: glitch-anim-2 2s infinite linear alternate-reverse; }
-        @keyframes glitch-anim-1 { 0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, -1px); } 20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 1px); } 40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); } 60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); } 100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -2px); } }
-        @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 1px); } 20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, -1px); } 40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 2px); } 60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, -2px); } 80% { clip-path: inset(50% 0 30% 0); transform: translate(1px, 1px); } 100% { clip-path: inset(10% 0 80% 0); transform: translate(-1px, -1px); } }
+        
+        /* HEADER GLITCH EFFECT */
+        .glitch { 
+            font-size: clamp(1.8rem, 6vw, 3rem); 
+            letter-spacing: 2px; 
+            color: #fff; 
+            position: relative; 
+            margin-bottom: 15px; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+        }
+        .glitch::before, .glitch::after { 
+            content: attr(data-text); 
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%; background: transparent; 
+        }
+        .glitch::before { left: 3px; text-shadow: -2px 0 #ff00c1; animation: glitch-anim-1 2s infinite linear alternate-reverse; }
+        .glitch::after { left: -3px; text-shadow: -2px 0 #00fff9; animation: glitch-anim-2 2s infinite linear alternate-reverse; }
+        
+        @keyframes glitch-anim-1 { 
+            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, -1px); } 
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 1px); } 
+            40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); } 
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); } 
+            100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -2px); } 
+        }
+        @keyframes glitch-anim-2 { 
+            0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 1px); } 
+            20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, -1px); } 
+            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 2px); } 
+            60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, -2px); } 
+            100% { clip-path: inset(10% 0 80% 0); transform: translate(-1px, -1px); } 
+        }
+
         .subtitle { color: #aaa; font-size: 0.9rem; line-height: 1.4; margin-bottom: 20px; }
+        
         .top-pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
         .pill { border: 1px solid #333; padding: 8px 16px; border-radius: 20px; font-size: 0.75rem; color: #ccc; text-transform: uppercase; }
-        .search-box { width: 100%; max-width: 600px; background: #0a0a0a; border: 1px solid #222; border-radius: 10px; padding: 15px 20px; color: #fff; font-family: inherit; font-size: 1rem; outline: none; margin-bottom: 20px; }
+        
+        .search-box { 
+            width: 100%; max-width: 600px; background: #0a0a0a; border: 1px solid #222; border-radius: 10px; 
+            padding: 15px 20px; color: #fff; font-family: inherit; font-size: 1rem; outline: none; margin-bottom: 20px; 
+        }
         .search-box:focus { border-color: #555; }
+        
         .file-count { font-size: 0.8rem; color: #888; margin-bottom: 15px; width: 100%; max-width: 600px; padding-left: 5px; }
+        
         .filter-row { display: flex; gap: 10px; width: 100%; max-width: 600px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
         .filter-row::-webkit-scrollbar { display: none; }
-        .filter-btn { background: #0a0a0a; border: 1px solid #222; color: #aaa; padding: 8px 16px; border-radius: 8px; font-family: inherit; cursor: pointer; font-size: 0.9rem; }
+        
+        .filter-btn { 
+            background: #0a0a0a; border: 1px solid #222; color: #aaa; padding: 8px 16px; 
+            border-radius: 8px; font-family: inherit; cursor: pointer; font-size: 0.9rem; 
+        }
         .filter-btn.active, .filter-btn:hover { background: #fff; color: #000; border-color: #fff; }
-        .safety { width: 100%; max-width: 600px; background: #0a0a0a; border: 1px solid #222; border-radius: 10px; padding: 15px 20px; margin-bottom: 25px; font-size: 0.8rem; color: #888; line-height: 1.5; }
+        
+        .safety { 
+            width: 100%; max-width: 600px; background: #0a0a0a; border: 1px solid #222; border-radius: 10px; 
+            padding: 15px 20px; margin-bottom: 25px; font-size: 0.8rem; color: #888; line-height: 1.5; 
+        }
+        
         .grid-container { width: 100%; max-width: 600px; display: grid; gap: 15px; }
+        
         .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
         .card:hover { border-color: #444; }
         .card-top { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .badge-box { width: 50px; height: 50px; border: 1px solid #333; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #ccc; flex-shrink: 0; }
+        
+        .badge-box { 
+            width: 50px; height: 50px; border: 1px solid #333; border-radius: 8px; 
+            display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #ccc; flex-shrink: 0; 
+        }
+        
         .file-name { font-size: 1.1rem; color: #fff; word-break: break-all; margin-bottom: 4px; }
         .file-type { font-size: 0.75rem; color: #666; }
-        .download-btn { background: #fff; color: #000; text-decoration: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; font-size: 0.9rem; text-align: center; width: 100%; animation: pulseBtn 2s infinite; display: block; }
-        @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); } 70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
-        .download-btn:hover { background: #ddd; transform: scale(1.02); animation: none; }
-        .download-btn:active { transform: scale(0.98); }
+
+        /* DOWNLOAD BUTTON GLITCH EFFECT */
+        .download-btn { 
+            background: #fff; 
+            color: #000; 
+            text-decoration: none; 
+            padding: 12px 20px; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            text-align: center; 
+            width: 100%; 
+            display: block;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: -3px 0 #ff00c1, 3px 0 #00fff9;
+            animation: btnGlitch 0.2s infinite linear alternate;
+        }
+
+        @keyframes btnGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 2px); clip-path: inset(10% 0 80% 0); }
+            40% { transform: translate(3px, -1px); clip-path: inset(60% 0 10% 0); }
+            60% { transform: translate(-2px, -2px); clip-path: inset(30% 0 50% 0); }
+            80% { transform: translate(2px, 2px); clip-path: inset(80% 0 5% 0); }
+            100% { transform: translate(-1px, 1px); clip-path: inset(20% 0 60% 0); }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 class="glitch" data-text="Quick trip bypass">Quick trip bypass</h1>
+        <h1 class="glitch" data-text="VØID.NET">VØID.NET</h1>
         <p class="subtitle">A dark digital archive. Search files by name or filter by file type.</p>
         <div class="top-pills">
             <span class="pill" id="totalFilesPill">23 FILES</span>
@@ -70,7 +159,6 @@
     <div class="grid-container" id="fileGrid"></div>
 
     <script>
-        // Dito nakalista lahat ng files. Kung may idadagdag ka, dito mo lang ilagay.
         const files = [
             { name: "01_clean_vm.bat", type: "bat", url: "https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file" },
             { name: "02_cloud_bypass.ps1", type: "ps1", url: "https://www.mediafire.com/file/iottqvyvzykfscb/02_cloud_bypass.ps1/file" },
@@ -102,10 +190,9 @@
         const filterBtns = document.querySelectorAll('.filter-btn');
         const countDisplay = document.getElementById('fileCountDisplay');
         
-        // Generate cards dynamically
         function renderCards() {
             grid.innerHTML = '';
-            files.forEach((file, index) => {
+            files.forEach((file) => {
                 const card = document.createElement('div');
                 card.className = 'card file-card';
                 card.setAttribute('data-type', file.type);
