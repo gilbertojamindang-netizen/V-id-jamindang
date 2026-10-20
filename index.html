@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VØID.NET - Bypass Archive</title>
+    <title>Quick trip bypass</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -13,11 +13,8 @@
             padding: 0;
         }
 
-        /* ANIMATED BACKGROUND */
         body {
-            background: linear-gradient(135deg, #020202, #0a0a0a, #111111, #050505);
-            background-size: 400% 400%;
-            animation: bgAnim 20s ease infinite;
+            background: #050505; /* Solid dark base */
             color: #e0e0e0;
             font-family: 'Share Tech Mono', monospace, Courier, sans-serif;
             padding: 20px;
@@ -25,37 +22,28 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        @keyframes bgAnim {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        /* TOP SECTION */
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 600px;
         }
 
-        /* GLITCH EFFECT FOR TITLE */
         .glitch {
-            font-size: 3rem;
-            letter-spacing: 6px;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            letter-spacing: 2px;
             color: #fff;
             position: relative;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        .glitch::before,
-        .glitch::after {
+        .glitch::before, .glitch::after {
             content: attr(data-text);
             position: absolute;
             top: 0;
@@ -66,13 +54,13 @@
         }
 
         .glitch::before {
-            left: 3px;
+            left: 2px;
             text-shadow: -2px 0 #ff00c1;
             animation: glitch-anim-1 2s infinite linear alternate-reverse;
         }
 
         .glitch::after {
-            left: -3px;
+            left: -2px;
             text-shadow: -2px 0 #00fff9;
             animation: glitch-anim-2 2s infinite linear alternate-reverse;
         }
@@ -95,144 +83,236 @@
             100% { clip-path: inset(10% 0 80% 0); transform: translate(-1px, -1px); }
         }
 
-        .header p {
-            color: #888;
+        .subtitle {
+            color: #aaa;
             font-size: 0.9rem;
-            letter-spacing: 2px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .top-pills {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .pill {
+            border: 1px solid #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        /* SEARCH & FILTERS */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
         }
 
         .search-box {
             width: 100%;
-            max-width: 600px;
-            background: rgba(17, 17, 17, 0.8);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 15px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 15px 20px;
             color: #fff;
             font-family: inherit;
             font-size: 1rem;
-            margin-bottom: 30px;
             outline: none;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s;
+            transition: border 0.3s;
         }
 
         .search-box:focus {
-            border-color: #888;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            border-color: #555;
         }
 
+        .file-count {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 600px;
+            padding-left: 5px;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            scrollbar-width: none; /* Firefox */
+        }
+        .filter-row::-webkit-scrollbar { display: none; } /* Chrome */
+
+        .filter-btn {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            color: #aaa;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* SAFETY NOTICE */
+        .safety {
+            width: 100%;
+            max-width: 600px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* CARD GRID */
         .grid-container {
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
         }
 
-        @media (min-width: 768px) {
-            .grid-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         .card {
-            background: rgba(10, 10, 10, 0.7);
+            background: #0a0a0a;
             border: 1px solid #222;
-            border-radius: 8px;
-            padding: 15px 20px;
+            border-radius: 12px;
+            padding: 20px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            flex-direction: column;
+            transition: all 0.2s ease;
         }
 
         .card:hover {
-            border-color: #555;
-            background: rgba(20, 20, 20, 0.9);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-color: #444;
         }
 
-        .file-info {
+        .card-top {
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-bottom: 15px;
         }
 
-        .badge {
-            background: #1a1a1a;
+        .badge-box {
+            width: 50px;
+            height: 50px;
             border: 1px solid #333;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
             font-weight: bold;
-            color: #aaa;
+            color: #ccc;
+            flex-shrink: 0;
+        }
+
+        .file-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .file-name {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
+            color: #fff;
             word-break: break-all;
+            margin-bottom: 4px;
         }
 
-        /* ANIMATED BUTTON */
+        .file-type {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* ANIMATED DOWNLOAD BUTTON */
         .download-btn {
             background: #fff;
             color: #000;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 12px 20px;
+            border-radius: 6px;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-family: inherit;
-            white-space: nowrap;
+            text-align: center;
+            width: 100%;
             transition: all 0.2s ease;
             animation: pulseBtn 2s infinite;
-            display: inline-block;
+            display: block;
         }
 
         @keyframes pulseBtn {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); }
             70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
 
         .download-btn:hover {
             background: #ddd;
-            transform: scale(1.1) translateY(-2px);
+            transform: scale(1.02);
             animation: none;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
 
         .download-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.98);
         }
 
-        .safety {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(17, 17, 17, 0.8);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 30px;
-            font-size: 0.85rem;
-            color: #888;
-            line-height: 1.5;
-            backdrop-filter: blur(5px);
-        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <!-- GLITCH TITLE -->
-        <h1 class="glitch" data-text="VØID.NET">VØID.NET</h1>
-        <p>A dark digital archive. Click to download.</p>
+        <h1 class="glitch" data-text="Quick trip bypass">Quick trip bypass</h1>
+        <p class="subtitle">A dark digital archive. Search files by name or filter by file type.</p>
+        
+        <div class="top-pills">
+            <span class="pill" id="totalFilesPill">23 FILES</span>
+            <span class="pill">BLACK / WHITE</span>
+            <span class="pill">MOBILE FRIENDLY</span>
+        </div>
     </div>
 
-    <input type="text" id="searchInput" class="search-box" placeholder="Search files..." onkeyup="filterFiles()">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search files..." onkeyup="filterFiles()">
+    </div>
+
+    <div class="file-count" id="fileCountDisplay">23 files</div>
+
+    <div class="filter-row">
+        <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+        <button class="filter-btn" onclick="setFilter('bat', this)">BAT</button>
+        <button class="filter-btn" onclick="setFilter('ps1', this)">PS1</button>
+        <button class="filter-btn" onclick="setFilter('inf', this)">INF</button>
+        <button class="filter-btn" onclick="setFilter('vbs', this)">VBS</button>
+        <button class="filter-btn" onclick="setFilter('vmx', this)">VMX</button>
+        <button class="filter-btn" onclick="setFilter('exe', this)">EXE</button>
+    </div>
 
     <div class="safety">
         <strong>Safety notice:</strong> File contents have not been verified. Be careful with scripts and configuration files. Only run files you trust and understand.
@@ -241,229 +321,240 @@
     <div class="grid-container" id="fileGrid">
         
         <!-- CARD 1 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">01_clean_vm.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">01_clean_vm.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 2 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">02_cloud_bypass.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">02_cloud_bypass.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/iottqvyvzykfscb/02_cloud_bypass.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 3 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">03_uac_off.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">03_uac_off.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/9gvuf6ezusg7ngq/03_uac_off.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 4 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">04_spoof_hwid.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">04_spoof_hwid.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/yzaqjj9pc8q0d1e/04_spoof_hwid.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 5 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">05_bypass_amsi.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">05_bypass_amsi.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/975i4bue6y9qhhg/05_bypass_amsi.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 6 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">06_defender_off.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">06_defender_off.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/ye3qu4fun76ylxx/06_defender_off.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 7 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">07_kill_telemetry.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">07_kill_telemetry.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/za5gvr8v1rfpnn0/07_kill_telemetry.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 8 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">08_killac.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">08_killac.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/r2jbfbpng19dkpq/08_killac.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 9 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">09_anti_shutdown.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">09_anti_shutdown.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/layjou0o52rpx1r/09_anti_shutdown.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 10 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">10_no_sleep.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">10_no_sleep.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/40q39ayjbgtcdxp/10_no_sleep.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 11 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">11_anti_idle.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">11_anti_idle.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/kef6d0z4e0lf2px/11_anti_idle.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 12 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">VBS</div>
-                <div class="file-name">12_start_watchdog.vbs</div>
+        <div class="card file-card" data-type="vbs">
+            <div class="card-top">
+                <div class="badge-box">VBS</div>
+                <div class="file-details">
+                    <div class="file-name">12_start_watchdog.vbs</div>
+                    <div class="file-type">.VBS FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/y32u4o22tis0s7q/12_start_watchdog.vbs/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 13 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">12_watchdog.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">12_watchdog.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/9b85fy6whvcmwif/12_watchdog.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 14 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">13_freeze_timer.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">13_freeze_timer.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/99fn26tlhqmflxg/13_freeze_timer.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 15 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">14_hide_proc.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">14_hide_proc.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/6zxyxfhn71o5iqq/14_hide_proc.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 16 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">PS1</div>
-                <div class="file-name">15_noshot.ps1</div>
+        <div class="card file-card" data-type="ps1">
+            <div class="card-top">
+                <div class="badge-box">PS1</div>
+                <div class="file-details">
+                    <div class="file-name">15_noshot.ps1</div>
+                    <div class="file-type">.PS1 FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/xk2sl1qdi9ujayh/15_noshot.ps1/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 17 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">16_stealth.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">16_stealth.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/jn50ueqkptb89rm/16_stealth.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 18 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">17_kick_spies.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">17_kick_spies.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/exb2kl9y7lby9m1/17_kick_spies.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 19 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">18_add_user.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">18_add_user.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
             <a href="https://www.mediafire.com/file/vlgsadujbez7060/18_add_user.bat/file" target="_blank" class="download-btn">Download</a>
         </div>
 
         <!-- CARD 20 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">BAT</div>
-                <div class="file-name">99_panic_wipe.bat</div>
+        <div class="card file-card" data-type="bat">
+            <div class="card-top">
+                <div class="badge-box">BAT</div>
+                <div class="file-details">
+                    <div class="file-name">99_panic_wipe.bat</div>
+                    <div class="file-type">.BAT FILE</div>
+                </div>
             </div>
-            <a href="https://www.mediafire.com/file/s7s18i1qx7jpe3c/99_panic_wipe.bat/file" target="_blank" class="download-btn">Download</a>
-        </div>
-
-        <!-- CARD 21 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">VMX</div>
-                <div class="file-name">cloudpc.vmx</div>
-            </div>
-            <a href="https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file" target="_blank" class="download-btn">Download</a>
-        </div>
-
-        <!-- CARD 22 -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge">INF</div>
-                <div class="file-name">autorun.inf</div>
-            </div>
-            <a href="https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file" target="_blank" class="download-btn">Download</a>
-        </div>
-
-        <!-- CARD 23 (UUYC ADDED) -->
-        <div class="card file-card">
-            <div class="file-info">
-                <div class="badge" style="color: #00fff9; border-color: #00fff9;">EXE</div>
-                <div class="file-name">uuyc_4.43.0.exe</div>
-            </div>
-            <a href="https://www.mediafire.com/file/x41vbp22bspse63/uuyc_4.43.0.exe/file" target="_blank" class="download-btn">Download</a>
-        </div>
-
-    </div>
-
-    <!-- SEARCH SCRIPT -->
-    <script>
-        function filterFiles() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('file-card');
-            
-            for (let i = 0; i < cards.length; i++) {
-                let fileName = cards[i].getElementsByClassName('file-name')[0].innerText.toLowerCase();
-                if (fileName.includes(input)) {
-                    cards[i].style.display = "flex";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-    </script>
-</body>
-</html>
+            <a href="htt
