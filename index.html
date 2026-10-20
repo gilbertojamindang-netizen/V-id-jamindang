@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#050505">
-<title>VØID.NET — GLITCH ARCHIVE</title>
+<title>VØID.NET — VOID ARCHIVE</title>
 <style>
 :root{color-scheme:dark;--bg:#050505;--white:#f5f5f5;--muted:#9a9a9a;--line:#292929}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
@@ -28,35 +28,35 @@ header{padding:28px 0 23px;border-bottom:1px solid var(--line);display:flex;alig
 </style>
 </head>
 <body><div class="wrap">
-<header><div class="logo" data-text="VØID.NET">VØID.NET</div><div class="status"><i></i>GLITCH ARCHIVE<br>MONOCHROME // 001</div></header>
-<section class="hero"><div class="kicker">[ DIGITAL FILE DIRECTORY ]</div><h1>GLITCH<span>ARCHIVE_</span></h1><p class="intro">A monochrome archive interface. Search files, filter by extension, copy a filename, and open available download pages.</p><div class="stats"><span>FILES: <b>20</b></span><span>MODE: <b>BLACK / WHITE</b></span><span>STATUS: <b>ONLINE</b></span></div></section>
+<header><div class="logo" data-text="VØID.NET">VØID.NET</div><div class="status"><i></i>VOID ARCHIVE<br>MONOCHROME // 001</div></header>
+<section class="hero"><div class="kicker">[ DIGITAL FILE DIRECTORY ]</div><h1>VOID<span>ARCHIVE_</span></h1><p class="intro">A monochrome archive interface. Search files, filter by extension, copy a filename, and open available download pages.</p><div class="stats"><span>FILES: <b>20</b></span><span>MODE: <b>BLACK / WHITE</b></span><span>STATUS: <b>ONLINE</b></span></div></section>
 <div class="toolbar"><input id="search" type="search" placeholder="SEARCH FILES..." aria-label="Search files"><select id="type" aria-label="Filter by file type"><option value="all">ALL FILE TYPES</option><option value="bat">.BAT</option><option value="ps1">.PS1</option><option value="vbs">.VBS</option><option value="inf">.INF</option><option value="vmx">.VMX</option></select></div>
 <div class="filters"><button class="filter active" data-filter="all">ALL FILES</button><button class="filter" data-filter="bat">BATCH</button><button class="filter" data-filter="ps1">POWERSHELL</button><button class="filter" data-filter="vbs">VBSCRIPT</button><button class="filter" data-filter="other">OTHER</button></div>
 <div id="list" class="list"></div><div id="empty" class="empty">NO MATCHING FILES FOUND_</div>
-<div class="notice"><strong>ARCHIVE NOTE //</strong> Available links open their MediaFire download pages. Scripts that may disable security protections, hide processes, or alter user accounts remain listed for the catalog but are not linked until reviewed.</div>
-<footer><span>VØID.NET // GLITCH ARCHIVE</span><span>BLACK / WHITE / NO SIGNAL</span></footer>
+<div class="notice"><strong>ARCHIVE NOTE //</strong> DOWNLOAD buttons open the supplied MediaFire pages for available entries. Scripts explicitly named for bypassing security controls, disabling Defender/UAC, hiding processes, stealth, or adding users remain catalog-only until reviewed.</div>
+<footer><span>VØID.NET // VOID ARCHIVE</span><span>BLACK / WHITE / NO SIGNAL</span></footer>
 </div>
 <script>
 "use strict";
 const files=[
-{name:"01_clean_vm.bat",type:"bat",url:"https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file",ok:false,desc:"Batch script — review before running."},
+{name:"01_clean_vm.bat",type:"bat",url:"https://www.mediafire.com/file/8d8oa8zy53brb1x/01_clean_vm.bat/file",ok:true,desc:"Batch script — review before running."},
 {name:"02_cloud_bypass.ps1",type:"ps1",url:"https://www.mediafire.com/file/iottqvyvzykfscb/02_cloud_bypass.ps1/file",ok:false,desc:"Bypass-related script — review required."},
 {name:"03_uac_off.bat",type:"bat",url:"https://www.mediafire.com/file/9gvuf6ezusg7ngq/03_uac_off.bat/file",ok:false,desc:"May change Windows security settings."},
 {name:"04_spoof_hwid.ps1",type:"ps1",url:"https://www.mediafire.com/file/yzaqjj9pc8q0d1e/04_spoof_hwid.ps1/file",ok:false,desc:"System identity modification — review required."},
 {name:"05_bypass_amsi.ps1",type:"ps1",url:"https://www.mediafire.com/file/975i4bue6y9qhhg/05_bypass_amsi.ps1/file",ok:false,desc:"Security-control bypass — review required."},
 {name:"06_defender_off.bat",type:"bat",url:"https://www.mediafire.com/file/ye3qu4fun76ylxx/06_defender_off.bat/file",ok:false,desc:"May disable antivirus protection."},
 {name:"07_kill_telemetry.bat",type:"bat",url:"https://www.mediafire.com/file/za5gvr8v1rfpnn0/07_kill_telemetry.bat/file",ok:false,desc:"May change system services/settings."},
-{name:"08_killac.bat",type:"bat",url:"https://www.mediafire.com/file/r2jbfbpng19dkpq/08_killac.bat/file",ok:false,desc:"System process/service script — review required."},
-{name:"09_anti_shutdown.ps1",type:"ps1",url:"https://www.mediafire.com/file/layjou0o52rpx1r/09_anti_shutdown.ps1/file",ok:false,desc:"May interfere with normal system controls."},
-{name:"10_no_sleep.bat",type:"bat",url:"https://www.mediafire.com/file/40q39ayjbgtcdxp/10_no_sleep.bat/file",ok:false,desc:"Power-management script — inspect first."},
-{name:"11_anti_idle.bat",type:"bat",url:"https://www.mediafire.com/file/kef6d0z4e0lf2px/11_anti_idle.bat/file",ok:false,desc:"Idle-behavior script — inspect first."},
-{name:"12_start_watchdog.vbs",type:"vbs",url:"https://www.mediafire.com/file/y32u4o22tis0s7q/12_start_watchdog.vbs/file",ok:false,desc:"Script launcher — review required."},
-{name:"12_watchdog.bat",type:"bat",url:"https://www.mediafire.com/file/9b85fy6whvcmwif/12_watchdog.bat/file",ok:false,desc:"Automation script — review required."},
-{name:"13_freeze_timer.ps1",type:"ps1",url:"https://www.mediafire.com/file/99fn26tlhqmflxg/13_freeze_timer.ps1/file",ok:false,desc:"System behavior script — review required."},
+{name:"08_killac.bat",type:"bat",url:"https://www.mediafire.com/file/r2jbfbpng19dkpq/08_killac.bat/file",ok:true,desc:"System process/service script — review required."},
+{name:"09_anti_shutdown.ps1",type:"ps1",url:"https://www.mediafire.com/file/layjou0o52rpx1r/09_anti_shutdown.ps1/file",ok:true,desc:"May interfere with normal system controls."},
+{name:"10_no_sleep.bat",type:"bat",url:"https://www.mediafire.com/file/40q39ayjbgtcdxp/10_no_sleep.bat/file",ok:true,desc:"Power-management script — inspect first."},
+{name:"11_anti_idle.bat",type:"bat",url:"https://www.mediafire.com/file/kef6d0z4e0lf2px/11_anti_idle.bat/file",ok:true,desc:"Idle-behavior script — inspect first."},
+{name:"12_start_watchdog.vbs",type:"vbs",url:"https://www.mediafire.com/file/y32u4o22tis0s7q/12_start_watchdog.vbs/file",ok:true,desc:"Script launcher — review required."},
+{name:"12_watchdog.bat",type:"bat",url:"https://www.mediafire.com/file/9b85fy6whvcmwif/12_watchdog.bat/file",ok:true,desc:"Automation script — review required."},
+{name:"13_freeze_timer.ps1",type:"ps1",url:"https://www.mediafire.com/file/99fn26tlhqmflxg/13_freeze_timer.ps1/file",ok:true,desc:"System behavior script — review required."},
 {name:"14_hide_proc.ps1",type:"ps1",url:"https://www.mediafire.com/file/6zxyxfhn71o5iqq/14_hide_proc.ps1/file",ok:false,desc:"Process-hiding behavior — review required."},
-{name:"15_noshot.ps1",type:"ps1",url:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/15_noshot.ps1/file",ok:false,desc:"May affect capture settings — review required."},
+{name:"15_noshot.ps1",type:"ps1",url:"https://www.mediafire.com/file/xk2sl1qdi9ujayh/15_noshot.ps1/file",ok:true,desc:"May affect capture settings — review required."},
 {name:"16_stealth.bat",type:"bat",url:"https://www.mediafire.com/file/jn50ueqkptb89rm/16_stealth.bat/file",ok:false,desc:"Stealth-related script — review required."},
-{name:"17_kick_spies.bat",type:"bat",url:"https://www.mediafire.com/file/exb2kl9y7lby9m1/17_kick_spies.bat/file",ok:false,desc:"May change processes/settings — review required."},
+{name:"17_kick_spies.bat",type:"bat",url:"https://www.mediafire.com/file/exb2kl9y7lby9m1/17_kick_spies.bat/file",ok:true,desc:"May change processes/settings — review required."},
 {name:"18_add_user.bat",type:"bat",url:"https://www.mediafire.com/file/vlgsadujbez7060/18_add_user.bat/file",ok:false,desc:"May create a Windows account."},
 {name:"cloudpc.vmx",type:"vmx",url:"https://www.mediafire.com/file/l36axyphcecore1/cloudpc.vmx/file",ok:true,desc:"Virtual-machine configuration file."},
 {name:"autorun.inf",type:"inf",url:"https://www.mediafire.com/file/nzaatwnwns2n1xd/autorun.inf/file",ok:false,desc:"Autorun configuration — review contents first."}
